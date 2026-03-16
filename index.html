@@ -9,6 +9,8 @@
   :root { --cream: #F0EDE6; --red: #E05A3A; --red-dark: #C44828; --charcoal: #2A2A2A; --mid: #6B6B6B; --light: #D9D5CD; --sketch: #3A3A3A; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--charcoal); overflow-x: hidden; }
+
+  /* NAV */
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: var(--cream); border-bottom: 1px solid var(--light); }
   .nav-logo img { height: 40px; width: auto; }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
@@ -16,8 +18,19 @@
   .nav-links a:hover { color: var(--red); }
   .nav-cta { background: var(--red); color: white !important; padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.78rem !important; letter-spacing: 0.1em !important; }
   .nav-cta:hover { background: var(--red-dark); color: white !important; }
+
+  /* MOBILE MENU */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--charcoal); border-radius: 2px; transition: all 0.3s; }
+  .mobile-menu { display: none; position: fixed; top: 65px; left: 0; right: 0; background: var(--cream); border-bottom: 1px solid var(--light); z-index: 99; padding: 1.5rem; flex-direction: column; gap: 0; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--charcoal); text-decoration: none; padding: 1rem 0; border-bottom: 1px solid var(--light); cursor: pointer; }
+  .mobile-menu a:last-child { border-bottom: none; color: var(--red); }
+
   section { display: none; }
   section.active { display: block; }
+
+  /* HOME */
   #home { padding-top: 80px; min-height: 100vh; }
   .hero { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; padding: 4rem 3rem 3rem; align-items: start; }
   .logo-mark { margin-bottom: 1rem; }
@@ -27,6 +40,8 @@
   .hero-center { display: flex; align-items: flex-start; justify-content: center; padding-top: 2rem; }
   .hero-right { display: flex; flex-direction: column; gap: 2rem; align-items: flex-end; }
   .hero-copy-right { font-size: 0.95rem; line-height: 1.7; color: var(--mid); text-align: right; max-width: 260px; }
+
+  /* EMAIL */
   .email-section { text-align: center; padding: 4rem 3rem; border-top: 1px solid var(--light); }
   .email-label { font-family: 'Georgia Pro', Georgia, 'Times New Roman', serif; font-size: 1.6rem; color: var(--charcoal); font-style: italic; margin-bottom: 1.5rem; font-weight: 700; }
   .email-form { display: flex; max-width: 480px; margin: 0 auto 3rem; border: 2px solid var(--charcoal); border-radius: 50px; overflow: hidden; background: white; }
@@ -37,6 +52,8 @@
   .collab-btn:hover { background: var(--red-dark); transform: translateY(-2px); }
   .contact-email { display: block; margin-top: 1rem; color: var(--red); text-decoration: none; font-size: 0.9rem; }
   .contact-email:hover { text-decoration: underline; }
+
+  /* ABOUT */
   #about { padding-top: 80px; min-height: 100vh; }
   .page-hero { padding: 5rem 3rem 3rem; max-width: 800px; }
   .page-eyebrow { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; }
@@ -52,6 +69,8 @@
   .manifesto { padding: 4rem 3rem; background: var(--charcoal); color: white; text-align: center; }
   .manifesto-text { font-family: 'Playfair Display', serif; font-size: 1.6rem; line-height: 1.6; max-width: 700px; margin: 0 auto; font-style: italic; }
   .manifesto-text span { color: var(--red); }
+
+  /* WORK */
   #work { padding-top: 80px; min-height: 100vh; }
   .work-header { padding: 4rem 3rem 2rem; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--light); }
   .work-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; background: var(--light); }
@@ -66,6 +85,8 @@
   .mini-frame .placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Georgia Pro', Georgia, serif; font-size: 1rem; color: var(--mid); padding: 1rem; text-align: center; }
   .mini-post { width: 5px; height: 30px; background: var(--sketch); margin: 0 auto; }
   .mini-base { width: 30px; height: 4px; background: var(--sketch); margin: 0 auto; border-radius: 1px; }
+
+  /* HOW */
   #how { padding-top: 80px; min-height: 100vh; }
   .how-header { padding: 4rem 3rem 2rem; }
   .steps { padding: 2rem 3rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
@@ -76,6 +97,8 @@
   .step-content h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--charcoal); }
   .step-content p { font-size: 0.88rem; line-height: 1.7; color: var(--mid); }
   .how-visual { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+
+  /* CONTACT */
   #contact { padding-top: 80px; min-height: 100vh; }
   .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 80px); }
   .contact-left { padding: 4rem 3rem; border-right: 1px solid var(--light); }
@@ -94,12 +117,74 @@
   .contact-info-item .ci-val { font-size: 1rem; color: var(--charcoal); }
   .contact-info-item a { color: var(--charcoal); text-decoration: none; }
   .contact-info-item a:hover { color: var(--red); }
+
+  /* FOOTER */
   footer { border-top: 1px solid var(--light); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--mid); }
   footer a { color: var(--mid); text-decoration: none; }
   footer a:hover { color: var(--red); }
   .pill { display: inline-block; padding: 0.3rem 1rem; border: 1.5px solid var(--red); border-radius: 50px; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   section.active .hero, section.active .page-hero, section.active .email-section { animation: fadeUp 0.5s ease both; }
+
+  /* ===================== MOBILE ===================== */
+  @media (max-width: 768px) {
+
+    /* NAV */
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+
+    /* HOME HERO — single column */
+    .hero { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 1.5rem; }
+    .logo-mark img { width: 200px; }
+    .hero-body { max-width: 100%; }
+    .hero-center { padding-top: 0; }
+    .hero-center > div { width: 100% !important; padding-top: 0 !important; }
+    .hero-right { align-items: flex-start; }
+    .hero-copy-right { text-align: left; max-width: 100%; }
+    .hero img { width: 100% !important; max-width: 100% !important; height: auto !important; }
+
+    /* EMAIL */
+    .email-section { padding: 3rem 1.5rem; }
+    .email-form { max-width: 100%; }
+    .email-label { font-size: 1.3rem; }
+
+    /* ABOUT */
+    .page-hero { padding: 3rem 1.5rem 2rem; }
+    .page-title { font-size: 2.2rem; }
+    .page-intro { font-size: 0.95rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-panel { border-right: none; padding: 2rem 1.5rem; }
+    .manifesto { padding: 3rem 1.5rem; }
+    .manifesto-text { font-size: 1.2rem; }
+
+    /* WORK */
+    .work-header { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .work-header .page-title { font-size: 2rem !important; }
+    .work-grid { grid-template-columns: 1fr; }
+    .work-card { padding: 2rem 1.5rem; }
+
+    /* HOW */
+    .how-header { padding: 3rem 1.5rem 1.5rem; }
+    .how-header .page-title { font-size: 2.2rem; }
+    .steps { grid-template-columns: 1fr; gap: 0; padding: 1.5rem; }
+    .how-visual { display: none; }
+    div[style*="background:var(--charcoal)"][style*="padding:4rem 3rem"] { padding: 3rem 1.5rem !important; }
+
+    /* CONTACT */
+    .contact-wrap { grid-template-columns: 1fr; }
+    .contact-left { border-right: none; border-bottom: 1px solid var(--light); padding: 3rem 1.5rem; }
+    .contact-left .page-title { font-size: 2.2rem !important; }
+    .contact-right { padding: 2rem 1.5rem; }
+    .contact-right h2 { font-size: 1.5rem; }
+
+    /* FOOTER */
+    footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 1.5rem; }
+    footer > div { flex-direction: column !important; gap: 0.5rem !important; }
+
+    /* GENERAL */
+    .collab-btn { padding: 1rem 2rem; font-size: 0.78rem; }
+  }
 </style>
 </head>
 <body>
@@ -113,7 +198,22 @@
     <li><a onclick="show('how')">How It Works</a></li>
     <li><a onclick="show('contact')" class="nav-cta">Let's Collaborate</a></li>
   </ul>
+  <!-- Hamburger for mobile -->
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </nav>
+
+<!-- Mobile dropdown menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="show('home'); closeMenu()">Home</a>
+  <a onclick="show('about'); closeMenu()">About</a>
+  <a onclick="show('work'); closeMenu()">Work</a>
+  <a onclick="show('how'); closeMenu()">How It Works</a>
+  <a onclick="show('contact'); closeMenu()">Let's Collaborate</a>
+</div>
 
 <!-- HOME -->
 <section id="home" class="active">
@@ -128,15 +228,15 @@
       <div style="width:100%;padding-top:5rem;">
         <img src="DC-HP-3.png" alt="Campaign visual 3" style="width:300px;height:auto;" />
       </div>
-      </div>
+    </div>
     <div class="hero-right">
       <div style="width:100%;padding-top:2rem;">
-      <img src="DC-HP-5.png" alt="Campaign visual 5" style="width:300px;height:auto;" />
-      <p class="hero-copy-right">What YouTube did for video, Canva did for design, and Bandcamp did for music, we’re doing for public advertising spaces: Giving more airtime to impactful ideas.</p>
+        <img src="DC-HP-5.png" alt="Campaign visual 5" style="width:300px;height:auto;" />
+        <p class="hero-copy-right">What YouTube did for video, Canva did for design, and Bandcamp did for music, we're doing for public advertising spaces: Giving more airtime to impactful ideas.</p>
+      </div>
     </div>
   </div>
-  </div>    
-  </div>  
+
   <div class="email-section">
     <div class="email-label">Stay in the loop</div>
     <div class="email-form">
@@ -456,6 +556,23 @@
     document.getElementById(id).classList.add('active');
     window.scrollTo(0, 0);
   }
+
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // Close menu if clicking outside
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('mobileMenu');
+    const hamburger = document.querySelector('.hamburger');
+    if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
 </script>
 </body>
 </html>
