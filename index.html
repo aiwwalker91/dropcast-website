@@ -6,636 +6,135 @@
 <title>Dropcast | Meaningful Moments in Public Spaces</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --cream: #F0EDE6;
-    --red: #E05A3A;
-    --red-dark: #C44828;
-    --charcoal: #2A2A2A;
-    --mid: #6B6B6B;
-    --light: #D9D5CD;
-    --sketch: #3A3A3A;
-  }
-
+  :root { --cream: #F0EDE6; --red: #E05A3A; --red-dark: #C44828; --charcoal: #2A2A2A; --mid: #6B6B6B; --light: #D9D5CD; --sketch: #3A3A3A; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--charcoal);
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.2rem 3rem;
-    background: var(--cream);
-    border-bottom: 1px solid var(--light);
-  }
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    color: var(--red);
-    letter-spacing: -0.02em;
-  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--charcoal); overflow-x: hidden; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: var(--cream); border-bottom: 1px solid var(--light); }
+  .nav-logo img { height: 40px; width: auto; }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    font-size: 0.82rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--charcoal);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+  .nav-links a { font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--charcoal); text-decoration: none; transition: color 0.2s; cursor: pointer; }
   .nav-links a:hover { color: var(--red); }
-  .nav-cta {
-    background: var(--red);
-    color: white !important;
-    padding: 0.5rem 1.2rem;
-    border-radius: 50px;
-    font-size: 0.78rem !important;
-    letter-spacing: 0.1em !important;
-  }
+  .nav-cta { background: var(--red); color: white !important; padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.78rem !important; letter-spacing: 0.1em !important; }
   .nav-cta:hover { background: var(--red-dark); color: white !important; }
-
-  /* PAGE SECTIONS */
   section { display: none; }
   section.active { display: block; }
-
-<nav>
-  <div class="nav-logo">dropcast</div>
-  <ul class="nav-links">
-    <li><a href="javascript:void(0)" onclick="show('home')">Home</a></li>
-    <li><a href="javascript:void(0)" onclick="show('about')">About</a></li>
-    <li><a href="javascript:void(0)" onclick="show('work')">Work</a></li>
-    <li><a href="javascript:void(0)" onclick="show('how')">How It Works</a></li>
-    <li><a href="javascript:void(0)" onclick="show('contact')" class="nav-cta">Let's Collaborate</a></li>
-  </ul>
-</nav>
-  
-  /* ===================== HOME ===================== */
-  #home {
-    padding-top: 80px;
-    min-height: 100vh;
-  }
-
-  .hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2rem;
-    padding: 4rem 3rem 3rem;
-    align-items: start;
-  }
-
-  .hero-left {}
-  .logo-mark {
-    margin-bottom: 1rem;
-  }
-  .logo-mark svg { width: 120px; height: 120px; }
-  .brand-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
-    color: var(--red);
-    line-height: 1;
-    letter-spacing: -0.03em;
-    margin-bottom: 0.3rem;
-  }
-  .tagline {
-    font-family: 'Georgia Pro', Georgia, 'Times New Roman', serif;
-    font-size: 1.3rem;
-    color: var(--red);
-    font-style: italic;
-    margin-bottom: 2.5rem;
-  }
-  .hero-body {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: var(--mid);
-    max-width: 280px;
-    margin-bottom: 2rem;
-  }
-  /* Sketch lines drawn on SVG */
-  .sketch-lines {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 4;
-  }
-
-  /* Hero columns */
-  .hero-center { 
-    display: flex; 
-    align-items: flex-start; 
-    justify-content: center;
-    padding-top: 2rem;
-  }
-  .hero-right {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: flex-end;
-  }
-
-  .hero-copy-right {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: var(--mid);
-    text-align: right;
-    max-width: 260px;
-  }
-
-  /* Email section */
-  .email-section {
-    text-align: center;
-    padding: 4rem 3rem;
-    border-top: 1px solid var(--light);
-  }
-  .email-label {
-    font-family: 'Georgia Pro', Georgia, 'Times New Roman', serif;
-    font-size: 1.6rem;
-    color: var(--charcoal);
-    font-style: italic;
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-  }
-  .email-form {
-    display: flex;
-    gap: 0;
-    max-width: 480px;
-    margin: 0 auto 3rem;
-    border: 2px solid var(--charcoal);
-    border-radius: 50px;
-    overflow: hidden;
-    background: white;
-  }
-  .email-form input {
-    flex: 1;
-    padding: 1rem 1.5rem;
-    border: none;
-    outline: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    background: transparent;
-    color: var(--charcoal);
-  }
-  .email-form button {
-    background: var(--red);
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 50px;
-    margin: 3px;
-    transition: background 0.2s;
-  }
+  #home { padding-top: 80px; min-height: 100vh; }
+  .hero { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; padding: 4rem 3rem 3rem; align-items: start; }
+  .logo-mark { margin-bottom: 1rem; }
+  .logo-mark img { width: 260px; height: auto; }
+  .tagline { font-family: 'Georgia Pro', Georgia, 'Times New Roman', serif; font-size: 1.3rem; color: var(--red); font-style: italic; margin-bottom: 2.5rem; }
+  .hero-body { font-size: 0.95rem; line-height: 1.7; color: var(--mid); max-width: 280px; margin-bottom: 2rem; }
+  .hero-center { display: flex; align-items: flex-start; justify-content: center; padding-top: 2rem; }
+  .hero-right { display: flex; flex-direction: column; gap: 2rem; align-items: flex-end; }
+  .hero-copy-right { font-size: 0.95rem; line-height: 1.7; color: var(--mid); text-align: right; max-width: 260px; }
+  .email-section { text-align: center; padding: 4rem 3rem; border-top: 1px solid var(--light); }
+  .email-label { font-family: 'Georgia Pro', Georgia, 'Times New Roman', serif; font-size: 1.6rem; color: var(--charcoal); font-style: italic; margin-bottom: 1.5rem; font-weight: 700; }
+  .email-form { display: flex; max-width: 480px; margin: 0 auto 3rem; border: 2px solid var(--charcoal); border-radius: 50px; overflow: hidden; background: white; }
+  .email-form input { flex: 1; padding: 1rem 1.5rem; border: none; outline: none; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; background: transparent; color: var(--charcoal); }
+  .email-form button { background: var(--red); color: white; border: none; padding: 1rem 2rem; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border-radius: 50px; margin: 3px; transition: background 0.2s; }
   .email-form button:hover { background: var(--red-dark); }
-
-  .collab-btn {
-    display: inline-block;
-    background: var(--red);
-    color: white;
-    padding: 1.1rem 3rem;
-    border-radius: 50px;
-    text-decoration: none;
-    font-size: 0.82rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 500;
-    transition: background 0.2s, transform 0.2s;
-    cursor: pointer;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-  }
+  .collab-btn { display: inline-block; background: var(--red); color: white; padding: 1.1rem 3rem; border-radius: 50px; text-decoration: none; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; transition: background 0.2s, transform 0.2s; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; }
   .collab-btn:hover { background: var(--red-dark); transform: translateY(-2px); }
-
-  .contact-email {
-    display: block;
-    margin-top: 1rem;
-    color: var(--red);
-    text-decoration: none;
-    font-size: 0.9rem;
-  }
+  .contact-email { display: block; margin-top: 1rem; color: var(--red); text-decoration: none; font-size: 0.9rem; }
   .contact-email:hover { text-decoration: underline; }
-
-  /* ===================== ABOUT ===================== */
   #about { padding-top: 80px; min-height: 100vh; }
-
-  .page-hero {
-    padding: 5rem 3rem 3rem;
-    max-width: 800px;
-  }
-  .page-eyebrow {
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 1rem;
-  }
-  .page-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    margin-bottom: 1.5rem;
-    color: var(--charcoal);
-  }
+  .page-hero { padding: 5rem 3rem 3rem; max-width: 800px; }
+  .page-eyebrow { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; }
+  .page-title { font-family: 'Playfair Display', serif; font-size: 3.5rem; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.5rem; color: var(--charcoal); }
   .page-title em { color: var(--red); font-style: italic; }
-  .page-intro {
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: var(--mid);
-    max-width: 560px;
-  }
-
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    border-top: 1px solid var(--light);
-    margin: 2rem 0;
-  }
-  .about-panel {
-    padding: 3rem;
-    border-right: 1px solid var(--light);
-    border-bottom: 1px solid var(--light);
-  }
+  .page-intro { font-size: 1.05rem; line-height: 1.8; color: var(--mid); max-width: 560px; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--light); margin: 2rem 0; }
+  .about-panel { padding: 3rem; border-right: 1px solid var(--light); border-bottom: 1px solid var(--light); }
   .about-panel:nth-child(even) { border-right: none; }
-  .about-panel h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-    color: var(--charcoal);
-  }
-  .about-panel p {
-    font-size: 0.92rem;
-    line-height: 1.7;
-    color: var(--mid);
-  }
-  .panel-num {
-    font-family: 'Georgia Pro', Georgia, 'Times New Roman', serif;
-    font-size: 2.5rem;
-    color: var(--red);
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-
-  .manifesto {
-    padding: 4rem 3rem;
-    background: var(--charcoal);
-    color: white;
-    text-align: center;
-  }
-  .manifesto-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    line-height: 1.6;
-    max-width: 700px;
-    margin: 0 auto;
-    font-style: italic;
-  }
+  .about-panel h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--charcoal); }
+  .about-panel p { font-size: 0.92rem; line-height: 1.7; color: var(--mid); }
+  .panel-num { font-family: 'Georgia Pro', Georgia, 'Times New Roman', serif; font-size: 2.5rem; color: var(--red); font-weight: 700; margin-bottom: 1rem; }
+  .manifesto { padding: 4rem 3rem; background: var(--charcoal); color: white; text-align: center; }
+  .manifesto-text { font-family: 'Playfair Display', serif; font-size: 1.6rem; line-height: 1.6; max-width: 700px; margin: 0 auto; font-style: italic; }
   .manifesto-text span { color: var(--red); }
-
-  /* ===================== WORK ===================== */
   #work { padding-top: 80px; min-height: 100vh; }
-
-  .work-header {
-    padding: 4rem 3rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    border-bottom: 1px solid var(--light);
-  }
-  .work-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2px;
-    background: var(--light);
-  }
-  .work-card {
-    background: var(--cream);
-    padding: 2.5rem;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
+  .work-header { padding: 4rem 3rem 2rem; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--light); }
+  .work-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; background: var(--light); }
+  .work-card { background: var(--cream); padding: 2.5rem; cursor: pointer; transition: background 0.3s; }
   .work-card:hover { background: white; }
-  .work-card-tag {
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 1rem;
-  }
-  .work-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    margin-bottom: 0.8rem;
-    color: var(--charcoal);
-  }
-  .work-card p {
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: var(--mid);
-    margin-bottom: 1.5rem;
-  }
-  .work-card-visual {
-    margin-top: 1.5rem;
-  }
-
-  /* Small billboard for work cards */
-  .mini-billboard {
-    width: 100%;
-    max-width: 200px;
-  }
-  .mini-frame {
-    border: 2px solid var(--sketch);
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 3px 3px 0 var(--sketch);
-    position: relative;
-    background: #eee;
-    padding-bottom: 65%;
-  }
-  .mini-frame .placeholder {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Georgia Pro', Georgia, 'Times New Roman', serif;
-    font-size: 1rem;
-    color: var(--mid);
-    padding: 1rem;
-    text-align: center;
-  }
-  .mini-post {
-    width: 5px; height: 30px;
-    background: var(--sketch);
-    margin: 0 auto;
-  }
-  .mini-base {
-    width: 30px; height: 4px;
-    background: var(--sketch);
-    margin: 0 auto;
-    border-radius: 1px;
-  }
-
-  /* ===================== HOW IT WORKS ===================== */
+  .work-card-tag { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; }
+  .work-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 0.8rem; color: var(--charcoal); }
+  .work-card p { font-size: 0.85rem; line-height: 1.6; color: var(--mid); margin-bottom: 1.5rem; }
+  .work-card-visual { margin-top: 1.5rem; }
+  .mini-billboard { width: 100%; max-width: 200px; }
+  .mini-frame { border: 2px solid var(--sketch); border-radius: 4px; overflow: hidden; box-shadow: 3px 3px 0 var(--sketch); position: relative; background: #eee; padding-bottom: 65%; }
+  .mini-frame .placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Georgia Pro', Georgia, serif; font-size: 1rem; color: var(--mid); padding: 1rem; text-align: center; }
+  .mini-post { width: 5px; height: 30px; background: var(--sketch); margin: 0 auto; }
+  .mini-base { width: 30px; height: 4px; background: var(--sketch); margin: 0 auto; border-radius: 1px; }
   #how { padding-top: 80px; min-height: 100vh; }
-
-  .how-header {
-    padding: 4rem 3rem 2rem;
-  }
-
-  .steps {
-    padding: 2rem 3rem 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
+  .how-header { padding: 4rem 3rem 2rem; }
+  .steps { padding: 2rem 3rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
   .steps-list { list-style: none; }
-  .step-item {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid var(--light);
-  }
+  .step-item { display: flex; gap: 1.5rem; margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--light); }
   .step-item:last-child { border-bottom: none; margin-bottom: 0; }
-  .step-num {
-    font-family: 'Georgia Pro', Georgia, 'Times New Roman', serif;
-    font-size: 2.5rem;
-    color: var(--red);
-    font-weight: 700;
-    line-height: 1;
-    min-width: 40px;
-  }
-  .step-content h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-    color: var(--charcoal);
-  }
-  .step-content p {
-    font-size: 0.88rem;
-    line-height: 1.7;
-    color: var(--mid);
-  }
-
-  .how-visual {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  /* Phone to billboard sketch */
-  .phone-to-screen {
-    position: relative;
-    width: 100%;
-    max-width: 300px;
-  }
-  .phone-sketch {
-    width: 70px;
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .arrow-sketch {
-    position: absolute;
-    left: 75px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 60px;
-  }
-  .screen-sketch {
-    margin-left: 140px;
-    width: 160px;
-  }
-
-  /* ===================== CONTACT ===================== */
+  .step-num { font-family: 'Georgia Pro', Georgia, 'Times New Roman', serif; font-size: 2.5rem; color: var(--red); font-weight: 700; line-height: 1; min-width: 40px; }
+  .step-content h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--charcoal); }
+  .step-content p { font-size: 0.88rem; line-height: 1.7; color: var(--mid); }
+  .how-visual { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
   #contact { padding-top: 80px; min-height: 100vh; }
-
-  .contact-wrap {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: calc(100vh - 80px);
-  }
-  .contact-left {
-    padding: 4rem 3rem;
-    border-right: 1px solid var(--light);
-  }
-  .contact-right {
-    padding: 4rem 3rem;
-    background: white;
-  }
-  .contact-right h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
-    color: var(--charcoal);
-  }
+  .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 80px); }
+  .contact-left { padding: 4rem 3rem; border-right: 1px solid var(--light); }
+  .contact-right { padding: 4rem 3rem; background: white; }
+  .contact-right h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 2rem; color: var(--charcoal); }
   .form-group { margin-bottom: 1.5rem; }
-  .form-group label {
-    display: block;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    color: var(--mid);
-  }
-  .form-group input,
-  .form-group textarea,
-  .form-group select {
-    width: 100%;
-    padding: 0.9rem 1rem;
-    border: 1.5px solid var(--light);
-    border-radius: 6px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    background: var(--cream);
-    color: var(--charcoal);
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .form-group input:focus,
-  .form-group textarea:focus,
-  .form-group select:focus { border-color: var(--red); }
+  .form-group label { display: block; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; color: var(--mid); }
+  .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.9rem 1rem; border: 1.5px solid var(--light); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; background: var(--cream); color: var(--charcoal); outline: none; transition: border-color 0.2s; }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--red); }
   .form-group textarea { height: 120px; resize: vertical; }
-  .submit-btn {
-    width: 100%;
-    background: var(--red);
-    color: white;
-    border: none;
-    padding: 1rem;
-    border-radius: 50px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
+  .submit-btn { width: 100%; background: var(--red); color: white; border: none; padding: 1rem; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
   .submit-btn:hover { background: var(--red-dark); }
-
-  .contact-info-item {
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--light);
-  }
+  .contact-info-item { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--light); }
   .contact-info-item:last-child { border-bottom: none; }
-  .contact-info-item .ci-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 0.4rem;
-  }
-  .contact-info-item .ci-val {
-    font-size: 1rem;
-    color: var(--charcoal);
-  }
+  .contact-info-item .ci-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); margin-bottom: 0.4rem; }
+  .contact-info-item .ci-val { font-size: 1rem; color: var(--charcoal); }
   .contact-info-item a { color: var(--charcoal); text-decoration: none; }
   .contact-info-item a:hover { color: var(--red); }
-
-  /* FOOTER */
-  footer {
-    border-top: 1px solid var(--light);
-    padding: 2rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.78rem;
-    color: var(--mid);
-  }
+  footer { border-top: 1px solid var(--light); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--mid); }
   footer a { color: var(--mid); text-decoration: none; }
   footer a:hover { color: var(--red); }
-
-  /* Sketch style elements */
-  .sketch-connector {
-    width: 100%;
-    overflow: visible;
-  }
-
-  /* Pill tag */
-  .pill {
-    display: inline-block;
-    padding: 0.3rem 1rem;
-    border: 1.5px solid var(--red);
-    border-radius: 50px;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 1rem;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  section.active .hero,
-  section.active .page-hero,
-  section.active .email-section {
-    animation: fadeUp 0.5s ease both;
-  }
-
-  /* Decorative sketch marks */
-  .sketch-mark {
-    stroke: var(--sketch);
-    fill: none;
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
+  .pill { display: inline-block; padding: 0.3rem 1rem; border: 1.5px solid var(--red); border-radius: 50px; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  section.active .hero, section.active .page-hero, section.active .email-section { animation: fadeUp 0.5s ease both; }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-logo"><img src="dropcast-logo.png" alt="Dropcast logo" style="width: 120px; height: auto;" /></div>
+  <div class="nav-logo"><img src="dropcast-logo.png" alt="Dropcast" /></div>
   <ul class="nav-links">
-    <li><a href="#" onclick="show('home')">Home</a></li>
-    <li><a href="#" onclick="show('about')">About</a></li>
-    <li><a href="#" onclick="show('work')">Work</a></li>
-    <li><a href="#" onclick="show('how')">How It Works</a></li>
-    <li><a href="#" onclick="show('contact')" class="nav-cta">Let's Collaborate</a></li>
+    <li><a onclick="show('home')">Home</a></li>
+    <li><a onclick="show('about')">About</a></li>
+    <li><a onclick="show('work')">Work</a></li>
+    <li><a onclick="show('how')">How It Works</a></li>
+    <li><a onclick="show('contact')" class="nav-cta">Let's Collaborate</a></li>
   </ul>
 </nav>
 
-<!-- ==================== HOME ==================== -->
+<!-- HOME -->
 <section id="home" class="active">
   <div class="hero">
-<!-- LEFT: Brand + copy + image-->
-<div class="hero-left">
-  <div class="logo-mark">
-    <img src="dropcast-logo.png" alt="Dropcast logo" style="width: 360px; height: auto;" />
-  </div>      <div class="tagline">meaningful moments in public spaces</div>
+    <div class="hero-left">
+      <div class="logo-mark"><img src="dropcast-logo.png" alt="Dropcast logo" /></div>
+      <div class="tagline">meaningful moments in public spaces</div>
       <p class="hero-body">Here for the artists, creators and brands doing good in the world.</p>
-             <img src="DC-HP-1.png" alt="Campaign visual 1" style="width: 250px; height: auto;" />
-  </div>
-     <!-- CENTER: Image -->
+      <img src="DC-HP-1.png" alt="Campaign visual 1" style="width:250px;height:auto;" />
+    </div>
     <div class="hero-center">
-      <div style="width:100%; padding-top:5rem;">
+      <div style="width:100%;padding-top:5rem;">
         <img src="DC-HP-3.png" alt="Campaign visual 3" style="width:250px;height:auto;" />
       </div>
     </div>
-   <!-- RIGHT: Image -->
-    <div class="hero-center">
-      <div style="width:100%; padding-top:1rem;">
-        <img src="DC-HP-5.png" alt="Campaign visual 5" style="width:250px;height:auto;" />
-      </div>
-      </div>
+    <div class="hero-right">
+      <img src="DC-HP-5.png" alt="Campaign visual 5" style="width:250px;height:auto;" />
       <p class="hero-copy-right">What YouTube did for video, Canva did for design, and Bandcamp did for music, we’re doing for public advertising spaces: Giving more airtime to impactful ideas.</p>
+    </div>
   </div>
-  <!-- Email + CTA -->
-  </div>
+
   <div class="email-section">
     <div class="email-label">Stay in the loop</div>
     <div class="email-form">
@@ -643,8 +142,8 @@
       <button>Join</button>
     </div>
     <button class="collab-btn" onclick="show('contact')">Let's Collaborate</button>
-  <a href="mailto:hi@dropcast.one" class="contact-email">hi@dropcast.one</a> 
-    </div>
+    <a href="mailto:hi@dropcast.one" class="contact-email">hi@dropcast.one</a>
+  </div>
 
   <footer>
     <div>© 2026 Dropcast</div>
@@ -656,18 +155,16 @@
   </footer>
 </section>
 
-<!-- ==================== ABOUT ==================== -->
+<!-- ABOUT -->
 <section id="about">
   <div class="page-hero">
     <div class="page-eyebrow">Our Story</div>
     <h1 class="page-title">Meaningful<br>Moments <em>in Public Spaces</em></h1>
     <p class="page-intro">We believe the most important stories deserve the most visible stages. Dropcast is the platform that makes public screen advertising accessible — not just for big brands, but for artists, creators, and changemakers.</p>
   </div>
-
   <div class="manifesto">
     <p class="manifesto-text">"What podcasts did for radio, and what Canva did for design, we're doing for public screens: making them <span>accessible</span> to the stories that matter."</p>
   </div>
-
   <div class="about-grid">
     <div class="about-panel">
       <div class="panel-num">01</div>
@@ -690,17 +187,16 @@
       <p>A world where the screens in our shared spaces reflect the full richness of our culture — not just those who can afford a traditional agency. Public space, for the public good.</p>
     </div>
   </div>
-
   <footer>
     <div>© 2026 Dropcast</div>
     <div style="display:flex;gap:2rem;">
       <a href="#">Privacy</a>
-      <a href="/cdn-cgi/l/email-protection#a8c0c1e8ccdac7d8cbc9dbdc86c7c6cd"><span class="__cf_email__" data-cfemail="cba3a28bafb9a4bba8aab8bfe5a4a5ae">[email&#160;protected]</span></a>
+      <a href="mailto:hi@dropcast.one">hi@dropcast.one</a>
     </div>
   </footer>
 </section>
 
-<!-- ==================== WORK ==================== -->
+<!-- WORK -->
 <section id="work">
   <div class="work-header">
     <div>
@@ -709,7 +205,6 @@
     </div>
     <button class="collab-btn" onclick="show('contact')">Start Your Project</button>
   </div>
-
   <div class="work-grid">
     <div class="work-card">
       <div class="work-card-tag">Artist Campaign</div>
@@ -720,12 +215,10 @@
           <div class="mini-frame" style="padding-bottom:65%;background:#e0ddd6;">
             <img src="https://images.unsplash.com/photo-1476231682828-37e571bc172f?w=400&q=80" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"/>
           </div>
-          <div class="mini-post"></div>
-          <div class="mini-base"></div>
+          <div class="mini-post"></div><div class="mini-base"></div>
         </div>
       </div>
     </div>
-
     <div class="work-card">
       <div class="work-card-tag">Brand Launch</div>
       <h3>Summer Drop</h3>
@@ -735,12 +228,10 @@
           <div class="mini-frame" style="padding-bottom:65%;background:#d6dde0;">
             <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=400&q=80" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"/>
           </div>
-          <div class="mini-post"></div>
-          <div class="mini-base"></div>
+          <div class="mini-post"></div><div class="mini-base"></div>
         </div>
       </div>
     </div>
-
     <div class="work-card">
       <div class="work-card-tag">Social Impact</div>
       <h3>Spectrum</h3>
@@ -750,12 +241,10 @@
           <div class="mini-frame" style="padding-bottom:65%;background:#e0d6d6;">
             <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"/>
           </div>
-          <div class="mini-post"></div>
-          <div class="mini-base"></div>
+          <div class="mini-post"></div><div class="mini-base"></div>
         </div>
       </div>
     </div>
-
     <div class="work-card">
       <div class="work-card-tag">Music Release</div>
       <h3>Album Drop</h3>
@@ -765,12 +254,10 @@
           <div class="mini-frame" style="padding-bottom:65%;background:#dde0d6;">
             <div class="placeholder">Your story here</div>
           </div>
-          <div class="mini-post"></div>
-          <div class="mini-base"></div>
+          <div class="mini-post"></div><div class="mini-base"></div>
         </div>
       </div>
     </div>
-
     <div class="work-card">
       <div class="work-card-tag">NGO Campaign</div>
       <h3>Ocean Watch</h3>
@@ -780,36 +267,32 @@
           <div class="mini-frame" style="padding-bottom:65%;background:#d6dde0;">
             <div class="placeholder">Your story here</div>
           </div>
-          <div class="mini-post"></div>
-          <div class="mini-base"></div>
+          <div class="mini-post"></div><div class="mini-base"></div>
         </div>
       </div>
     </div>
-
-    <div class="work-card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:var(--charcoal);color:white;cursor:pointer;" onclick="show('contact')">
+    <div class="work-card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:var(--charcoal);color:white;" onclick="show('contact')">
       <div style="font-family:'Georgia Pro',Georgia,serif;font-size:2.5rem;color:var(--red);margin-bottom:1rem;font-weight:700;">+</div>
       <h3 style="color:white;margin-bottom:0.5rem;">Your Story</h3>
       <p style="color:#888;">Ready to take your message to the streets?</p>
       <button class="collab-btn" style="margin-top:1.5rem;">Get Started</button>
     </div>
   </div>
-
   <footer>
     <div>© 2026 Dropcast</div>
     <div style="display:flex;gap:2rem;">
       <a href="#">Privacy</a>
-      <a href="/cdn-cgi/l/email-protection#aac2c3eaced8c5dac9cbd9de84c5c4cf"><span class="__cf_email__" data-cfemail="026a6b4266706d72616371762c6d6c67">[email&#160;protected]</span></a>
+      <a href="mailto:hi@dropcast.one">hi@dropcast.one</a>
     </div>
   </footer>
 </section>
 
-<!-- ==================== HOW IT WORKS ==================== -->
+<!-- HOW IT WORKS -->
 <section id="how">
   <div class="how-header">
     <div class="page-eyebrow">The Process</div>
     <h1 class="page-title">From idea to<br><em>public screen</em></h1>
   </div>
-
   <div class="steps">
     <ul class="steps-list">
       <li class="step-item">
@@ -841,91 +324,69 @@
         </div>
       </li>
     </ul>
-
-    <!-- Visual diagram: phone → billboard -->
     <div class="how-visual">
-      <!-- Phone sketch -->
       <svg width="280" height="340" viewBox="0 0 280 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Phone -->
         <rect x="10" y="20" width="70" height="120" rx="10" stroke="#3A3A3A" stroke-width="2" fill="white"/>
         <rect x="18" y="32" width="54" height="90" rx="4" stroke="#3A3A3A" stroke-width="1.5" fill="#F0EDE6"/>
         <circle cx="45" cy="135" r="5" stroke="#3A3A3A" stroke-width="1.5" fill="none"/>
         <line x1="38" y1="25" x2="52" y2="25" stroke="#3A3A3A" stroke-width="2" stroke-linecap="round"/>
-
-        <!-- Arrow curves -->
         <path d="M85 80 C120 80 130 60 150 50" stroke="#E05A3A" stroke-width="2" stroke-dasharray="6 4" stroke-linecap="round" fill="none"/>
         <polygon points="150,44 158,54 142,54" fill="#E05A3A"/>
-
-        <!-- Billboard tall -->
         <rect x="158" y="10" width="100" height="140" rx="3" stroke="#3A3A3A" stroke-width="2" fill="white"/>
         <rect x="164" y="16" width="88" height="128" rx="2" stroke="#3A3A3A" stroke-width="1" fill="#D9D5CD"/>
         <circle cx="167" cy="19" r="4" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
         <circle cx="249" cy="19" r="4" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
         <circle cx="167" cy="141" r="4" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
         <circle cx="249" cy="141" r="4" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
-        <!-- Post -->
         <line x1="208" y1="150" x2="208" y2="200" stroke="#3A3A3A" stroke-width="3" stroke-linecap="round"/>
         <line x1="190" y1="200" x2="226" y2="200" stroke="#3A3A3A" stroke-width="3" stroke-linecap="round"/>
-
-        <!-- Kiosk -->
         <rect x="30" y="230" width="60" height="100" rx="8" stroke="#3A3A3A" stroke-width="2" fill="white"/>
         <rect x="36" y="236" width="48" height="80" rx="4" stroke="#3A3A3A" stroke-width="1" fill="#D9D5CD"/>
         <rect x="36" y="316" width="48" height="14" rx="2" stroke="#3A3A3A" stroke-width="1" fill="#eee"/>
-        <!-- kiosk post -->
         <line x1="60" y1="330" x2="60" y2="340" stroke="#3A3A3A" stroke-width="3" stroke-linecap="round"/>
-
-        <!-- Lightbox horizontal -->
-        <rect x="140" y="245" width="130" height="75" rx="8" stroke="#3A3A3A" stroke-width="2" fill="white" filter="url(#shadow)"/>
+        <rect x="140" y="245" width="130" height="75" rx="8" stroke="#3A3A3A" stroke-width="2" fill="white"/>
         <rect x="148" y="253" width="114" height="59" rx="4" stroke="#3A3A3A" stroke-width="1" fill="#D9D5CD"/>
         <circle cx="152" cy="257" r="4" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
         <circle cx="268" cy="257" r="4" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
         <circle cx="152" cy="308" r="4" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
         <circle cx="268" cy="308" r="4" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
-        <!-- legs -->
         <line x1="175" y1="320" x2="175" y2="340" stroke="#3A3A3A" stroke-width="2" stroke-linecap="round"/>
         <line x1="245" y1="320" x2="245" y2="340" stroke="#3A3A3A" stroke-width="2" stroke-linecap="round"/>
         <line x1="165" y1="340" x2="185" y2="340" stroke="#3A3A3A" stroke-width="2" stroke-linecap="round"/>
         <line x1="235" y1="340" x2="255" y2="340" stroke="#3A3A3A" stroke-width="2" stroke-linecap="round"/>
-
-        <!-- arrow from phone to kiosk -->
         <path d="M80 260 C100 260 110 255 125 258" stroke="#E05A3A" stroke-width="1.5" stroke-dasharray="5 3" fill="none" stroke-linecap="round"/>
         <polygon points="125,253 133,260 125,264" fill="#E05A3A"/>
       </svg>
-
       <div style="text-align:center;max-width:240px;">
         <p style="font-size:0.88rem;color:var(--mid);line-height:1.6;">Your content, deployed across billboards, kiosks, and transit screens in your chosen cities.</p>
       </div>
     </div>
   </div>
-
-  <!-- Pricing teaser -->
   <div style="background:var(--charcoal);color:white;padding:4rem 3rem;text-align:center;">
     <div class="pill" style="border-color:var(--red);color:var(--red);">Pricing</div>
     <h2 style="font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:1rem;">Accessible by design</h2>
     <p style="font-size:0.95rem;color:#aaa;max-width:500px;margin:0 auto 2rem;line-height:1.7;">We price campaigns to be within reach for independent creators and small organisations. No agency markup. No minimum spend in the millions.</p>
     <button class="collab-btn" onclick="show('contact')">Get a Quote</button>
   </div>
-
   <footer>
     <div>© 2026 Dropcast</div>
     <div style="display:flex;gap:2rem;">
       <a href="#">Privacy</a>
-      <a href="/cdn-cgi/l/email-protection#9ff7f6dffbedf0effcfeecebb1f0f1fa"><span class="__cf_email__" data-cfemail="88e0e1c8ecfae7f8ebe9fbfca6e7e6ed">[email&#160;protected]</span></a>
+      <a href="mailto:hi@dropcast.one">hi@dropcast.one</a>
     </div>
   </footer>
 </section>
 
-<!-- ==================== CONTACT ==================== -->
+<!-- CONTACT -->
 <section id="contact">
   <div class="contact-wrap">
     <div class="contact-left">
       <div class="page-eyebrow">Get In Touch</div>
       <h1 class="page-title" style="font-size:2.8rem;">Let's tell your<br><em>story</em></h1>
       <p style="font-size:0.92rem;line-height:1.7;color:var(--mid);margin-bottom:3rem;max-width:340px;">Whether you have a fully formed campaign or just an idea, we'd love to hear from you. Reach out and let's figure out how to get your story seen.</p>
-
       <div class="contact-info-item">
         <div class="ci-label">Email</div>
-        <div class="ci-val"><a href="/cdn-cgi/l/email-protection#325a5b7256405d42515341461c5d5c57"><span class="__cf_email__" data-cfemail="2048496044524f50434153540e4f4e45">[email&#160;protected]</span></a></div>
+        <div class="ci-val"><a href="mailto:hi@dropcast.one">hi@dropcast.one</a></div>
       </div>
       <div class="contact-info-item">
         <div class="ci-label">For artists & creators</div>
@@ -935,8 +396,6 @@
         <div class="ci-label">Response time</div>
         <div class="ci-val">We reply within 1–2 business days</div>
       </div>
-
-      <!-- Small billboard doodle -->
       <div style="margin-top:3rem;">
         <svg width="180" height="160" viewBox="0 0 180 160" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="10" y="10" width="160" height="100" rx="6" stroke="#3A3A3A" stroke-width="2" fill="none"/>
@@ -953,7 +412,6 @@
         </svg>
       </div>
     </div>
-
     <div class="contact-right">
       <h2>Start a conversation</h2>
       <div class="form-group">
@@ -972,3 +430,30 @@
           <option>NGO / Social Enterprise</option>
           <option>Musician</option>
           <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tell us about your project</label>
+        <textarea placeholder="What's the story you want to tell? What's the occasion, the audience, the vibe?"></textarea>
+      </div>
+      <button class="submit-btn">Send It →</button>
+    </div>
+  </div>
+  <footer>
+    <div>© 2026 Dropcast</div>
+    <div style="display:flex;gap:2rem;">
+      <a href="#">Privacy</a>
+      <a href="mailto:hi@dropcast.one">hi@dropcast.one</a>
+    </div>
+  </footer>
+</section>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+</script>
+</body>
+</html>
