@@ -3,576 +3,363 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dropcast | Meaningful Moments in Public Spaces</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Dropcast — Meaningful Moments in Public Spaces</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
-  :root { --cream: #F0EDE6; --red: #E05A3A; --red-dark: #C44828; --charcoal: #2A2A2A; --mid: #6B6B6B; --light: #D9D5CD; --sketch: #3A3A3A; }
+  :root {
+    --cream: #F0EDE6;
+    --red: #E05A3A;
+    --red-dark: #C44828;
+    --charcoal: #2A2A2A;
+    --mid: #7A7570;
+    --light: #DDD9D1;
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--charcoal); overflow-x: hidden; }
 
-  /* NAV */
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: var(--cream); border-bottom: 1px solid var(--light); }
-  .nav-logo img { height: 40px; width: auto; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a { font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--charcoal); text-decoration: none; transition: color 0.2s; cursor: pointer; }
-  .nav-links a:hover { color: var(--red); }
-  .nav-cta { background: var(--red); color: white !important; padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.78rem !important; letter-spacing: 0.1em !important; }
-  .nav-cta:hover { background: var(--red-dark); color: white !important; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Critical for mobile stability */
+  }
 
-  /* MOBILE MENU */
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-  .hamburger span { display: block; width: 24px; height: 2px; background: var(--charcoal); border-radius: 2px; transition: all 0.3s; }
-  .mobile-menu { display: none; position: fixed; top: 65px; left: 0; right: 0; background: var(--cream); border-bottom: 1px solid var(--light); z-index: 99; padding: 1.5rem; flex-direction: column; gap: 0; }
-  .mobile-menu.open { display: flex; }
-  .mobile-menu a { font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--charcoal); text-decoration: none; padding: 1rem 0; border-bottom: 1px solid var(--light); cursor: pointer; }
-  .mobile-menu a:last-child { border-bottom: none; color: var(--red); }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
 
-  section { display: none; }
-  section.active { display: block; }
+  .page {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 3rem;
+  }
 
-  /* HOME */
-  #home { padding-top: 80px; min-height: 100vh; }
-  .hero { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; padding: 4rem 3rem 3rem; align-items: start; }
-  .logo-mark { margin-bottom: 1rem; }
-  .logo-mark img { width: 260px; height: auto; }
-  .tagline { font-family: 'Georgia Pro', Georgia, 'Times New Roman', serif; font-size: 1.3rem; color: var(--red); font-style: italic; margin-bottom: 2.5rem; }
-  .hero-body { font-size: 0.95rem; line-height: 1.7; color: var(--mid); max-width: 280px; margin-bottom: 2rem; }
-  .hero-center { display: flex; align-items: flex-start; justify-content: center; padding-top: 2rem; }
-  .hero-right { display: flex; flex-direction: column; gap: 2rem; align-items: flex-end; }
-  .hero-copy-right { font-size: 0.95rem; line-height: 1.7; color: var(--mid); text-align: right; max-width: 260px; }
+  /* ── Header ── */
+  header {
+    padding: 2.5rem 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-  /* EMAIL */
-  .email-section { text-align: center; padding: 4rem 3rem; border-top: 1px solid var(--light); }
-  .email-label { font-family: 'Georgia Pro', Georgia, 'Times New Roman', serif; font-size: 1.6rem; color: var(--charcoal); font-style: italic; margin-bottom: 1.5rem; font-weight: 700; }
-  .email-form { display: flex; max-width: 480px; margin: 0 auto 3rem; border: 2px solid var(--charcoal); border-radius: 50px; overflow: hidden; background: white; }
-  .email-form input { flex: 1; padding: 1rem 1.5rem; border: none; outline: none; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; background: transparent; color: var(--charcoal); }
-  .email-form button { background: var(--red); color: white; border: none; padding: 1rem 2rem; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border-radius: 50px; margin: 3px; transition: background 0.2s; }
-  .email-form button:hover { background: var(--red-dark); }
-  .collab-btn { display: inline-block; background: var(--red); color: white; padding: 1.1rem 3rem; border-radius: 50px; text-decoration: none; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; transition: background 0.2s, transform 0.2s; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; }
-  .collab-btn:hover { background: var(--red-dark); transform: translateY(-2px); }
-  .contact-email { display: block; margin-top: 1rem; color: var(--red); text-decoration: none; font-size: 0.9rem; }
-  .contact-email:hover { text-decoration: underline; }
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--charcoal);
+  }
 
-  /* ABOUT */
-  #about { padding-top: 80px; min-height: 100vh; }
-  .page-hero { padding: 5rem 3rem 3rem; max-width: 800px; }
-  .page-eyebrow { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; }
-  .page-title { font-family: 'Playfair Display', serif; font-size: 3.5rem; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.5rem; color: var(--charcoal); }
-  .page-title em { color: var(--red); font-style: italic; }
-  .page-intro { font-size: 1.05rem; line-height: 1.8; color: var(--mid); max-width: 560px; }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--light); margin: 2rem 0; }
-  .about-panel { padding: 3rem; border-right: 1px solid var(--light); border-bottom: 1px solid var(--light); }
-  .about-panel:nth-child(even) { border-right: none; }
-  .about-panel h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--charcoal); }
-  .about-panel p { font-size: 0.92rem; line-height: 1.7; color: var(--mid); }
-  .panel-num { font-family: 'Georgia Pro', Georgia, 'Times New Roman', serif; font-size: 2.5rem; color: var(--red); font-weight: 700; margin-bottom: 1rem; }
-  .manifesto { padding: 4rem 3rem; background: var(--charcoal); color: white; text-align: center; }
-  .manifesto-text { font-family: 'Playfair Display', serif; font-size: 1.6rem; line-height: 1.6; max-width: 700px; margin: 0 auto; font-style: italic; }
-  .manifesto-text span { color: var(--red); }
+  .header-email {
+    font-size: 0.82rem;
+    color: var(--mid);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .header-email:hover { color: var(--red); }
 
-  /* WORK */
-  #work { padding-top: 80px; min-height: 100vh; }
-  .work-header { padding: 4rem 3rem 2rem; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--light); }
-  .work-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; background: var(--light); }
-  .work-card { background: var(--cream); padding: 2.5rem; cursor: pointer; transition: background 0.3s; }
-  .work-card:hover { background: white; }
-  .work-card-tag { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; }
-  .work-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 0.8rem; color: var(--charcoal); }
-  .work-card p { font-size: 0.85rem; line-height: 1.6; color: var(--mid); margin-bottom: 1.5rem; }
-  .work-card-visual { margin-top: 1.5rem; }
-  .mini-billboard { width: 100%; max-width: 200px; }
-  .mini-frame { border: 2px solid var(--sketch); border-radius: 4px; overflow: hidden; box-shadow: 3px 3px 0 var(--sketch); position: relative; background: #eee; padding-bottom: 65%; }
-  .mini-frame .placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Georgia Pro', Georgia, serif; font-size: 1rem; color: var(--mid); padding: 1rem; text-align: center; }
-  .mini-post { width: 5px; height: 30px; background: var(--sketch); margin: 0 auto; }
-  .mini-base { width: 30px; height: 4px; background: var(--sketch); margin: 0 auto; border-radius: 1px; }
+  /* ── Marquee ── */
+  .marquee-wrap {
+    border-top: 1px solid var(--light);
+    border-bottom: 1px solid var(--light);
+    overflow: hidden;
+    padding: 0.9rem 0;
+    margin: 2rem -3rem 0;
+    opacity: 0;
+    animation: fadeIn 0.8s ease 0.8s forwards;
+  }
 
-  /* HOW */
-  #how { padding-top: 80px; min-height: 100vh; }
-  .how-header { padding: 4rem 3rem 2rem; }
-  .steps { padding: 2rem 3rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-  .steps-list { list-style: none; }
-  .step-item { display: flex; gap: 1.5rem; margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--light); }
-  .step-item:last-child { border-bottom: none; margin-bottom: 0; }
-  .step-num { font-family: 'Georgia Pro', Georgia, 'Times New Roman', serif; font-size: 2.5rem; color: var(--red); font-weight: 700; line-height: 1; min-width: 40px; }
-  .step-content h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--charcoal); }
-  .step-content p { font-size: 0.88rem; line-height: 1.7; color: var(--mid); }
-  .how-visual { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 28s linear infinite;
+  }
 
-  /* CONTACT */
-  #contact { padding-top: 80px; min-height: 100vh; }
-  .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 80px); }
-  .contact-left { padding: 4rem 3rem; border-right: 1px solid var(--light); }
-  .contact-right { padding: 4rem 3rem; background: white; }
-  .contact-right h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 2rem; color: var(--charcoal); }
-  .form-group { margin-bottom: 1.5rem; }
-  .form-group label { display: block; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; color: var(--mid); }
-  .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.9rem 1rem; border: 1.5px solid var(--light); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; background: var(--cream); color: var(--charcoal); outline: none; transition: border-color 0.2s; }
-  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--red); }
-  .form-group textarea { height: 120px; resize: vertical; }
-  .submit-btn { width: 100%; background: var(--red); color: white; border: none; padding: 1rem; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
-  .submit-btn:hover { background: var(--red-dark); }
-  .contact-info-item { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--light); }
-  .contact-info-item:last-child { border-bottom: none; }
-  .contact-info-item .ci-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); margin-bottom: 0.4rem; }
-  .contact-info-item .ci-val { font-size: 1rem; color: var(--charcoal); }
-  .contact-info-item a { color: var(--charcoal); text-decoration: none; }
-  .contact-info-item a:hover { color: var(--red); }
+  .marquee-track span {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.78rem;
+    font-style: italic;
+    letter-spacing: 0.1em;
+    color: var(--light);
+    padding: 0 2.5rem;
+    white-space: nowrap;
+  }
 
-  /* FOOTER */
-  footer { border-top: 1px solid var(--light); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--mid); }
-  footer a { color: var(--mid); text-decoration: none; }
+  .marquee-track span.accent { color: var(--red); }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── Main Layout (The Split) ── */
+  main {
+    display: flex;
+    flex-direction: row; /* Desktop split */
+    align-items: center;
+    gap: 4rem;
+    padding: 5rem 0;
+    flex: 1;
+  }
+
+  .hero-content {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-image-container {
+    flex: 0.8;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.4s forwards;
+  }
+
+  .portrait-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 4px; /* Subtle organic edge */
+    filter: grayscale(10%) contrast(105%);
+    box-shadow: 20px 20px 60px rgba(0,0,0,0.05);
+  }
+
+  /* ── Typography & Elements ── */
+  .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.1s forwards;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--charcoal);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.2s forwards;
+  }
+
+  h1 em { color: var(--red); font-style: italic; }
+
+  .rule {
+    width: 48px;
+    height: 2px;
+    background: var(--red);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.3s forwards;
+  }
+
+  .body-copy {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--mid);
+    max-width: 520px;
+    margin-bottom: 3.5rem;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.4s forwards;
+  }
+
+  .body-copy strong {
+    color: var(--charcoal);
+    font-weight: 500;
+  }
+
+  .cta-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.55s forwards;
+  }
+
+  .btn-collab {
+    display: inline-block;
+    background: var(--red);
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 20px rgba(224, 90, 58, 0.25);
+  }
+  .btn-collab:hover {
+    background: var(--red-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(224, 90, 58, 0.35);
+  }
+
+  .cta-email {
+    font-size: 0.88rem;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .cta-email::before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 1px;
+    background: var(--light);
+    flex-shrink: 0;
+  }
+  .cta-email:hover { color: var(--red); }
+
+  /* ── Footer ── */
+  footer {
+    padding: 2rem 0 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--light);
+    font-size: 0.76rem;
+    color: var(--mid);
+    letter-spacing: 0.04em;
+  }
+
+  footer a { color: var(--mid); text-decoration: none; transition: color 0.2s; }
   footer a:hover { color: var(--red); }
-  .pill { display: inline-block; padding: 0.3rem 1rem; border: 1.5px solid var(--red); border-radius: 50px; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  section.active .hero, section.active .page-hero, section.active .email-section { animation: fadeUp 0.5s ease both; }
+  .footer-links { display: flex; gap: 2rem; }
 
-  /* ===================== MOBILE ===================== */
-  @media (max-width: 768px) {
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
 
-    /* NAV */
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .hamburger { display: flex; }
+  /* ── Mobile Optimization ── */
+  @media (max-width: 900px) {
+    main {
+      flex-direction: column-reverse; /* Image below text for better storytelling */
+      padding: 4rem 0;
+      gap: 3rem;
+    }
+    .hero-image-container {
+      width: 100%;
+      max-width: 400px; /* Prevent portrait from becoming massive on tablets */
+    }
+  }
 
-    /* HOME HERO — single column */
-    .hero { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 1.5rem; }
-    .logo-mark img { width: 200px; }
-    .hero-body { max-width: 100%; }
-    .hero-center { padding-top: 0; }
-    .hero-center > div { width: 100% !important; padding-top: 0 !important; }
-    .hero-right { align-items: flex-start; }
-    .hero-copy-right { text-align: left; max-width: 100%; }
-    .hero img { width: 100% !important; max-width: 100% !important; height: auto !important; }
-
-    /* EMAIL */
-    .email-section { padding: 3rem 1.5rem; }
-    .email-form { max-width: 100%; }
-    .email-label { font-size: 1.3rem; }
-
-    /* ABOUT */
-    .page-hero { padding: 3rem 1.5rem 2rem; }
-    .page-title { font-size: 2.2rem; }
-    .page-intro { font-size: 0.95rem; }
-    .about-grid { grid-template-columns: 1fr; }
-    .about-panel { border-right: none; padding: 2rem 1.5rem; }
-    .manifesto { padding: 3rem 1.5rem; }
-    .manifesto-text { font-size: 1.2rem; }
-
-    /* WORK */
-    .work-header { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-    .work-header .page-title { font-size: 2rem !important; }
-    .work-grid { grid-template-columns: 1fr; }
-    .work-card { padding: 2rem 1.5rem; }
-
-    /* HOW */
-    .how-header { padding: 3rem 1.5rem 1.5rem; }
-    .how-header .page-title { font-size: 2.2rem; }
-    .steps { grid-template-columns: 1fr; gap: 0; padding: 1.5rem; }
-    .how-visual { display: none; }
-    div[style*="background:var(--charcoal)"][style*="padding:4rem 3rem"] { padding: 3rem 1.5rem !important; }
-
-    /* CONTACT */
-    .contact-wrap { grid-template-columns: 1fr; }
-    .contact-left { border-right: none; border-bottom: 1px solid var(--light); padding: 3rem 1.5rem; }
-    .contact-left .page-title { font-size: 2.2rem !important; }
-    .contact-right { padding: 2rem 1.5rem; }
-    .contact-right h2 { font-size: 1.5rem; }
-
-    /* FOOTER */
-    footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 1.5rem; }
-    footer > div { flex-direction: column !important; gap: 0.5rem !important; }
-
-    /* GENERAL */
-    .collab-btn { padding: 1rem 2rem; font-size: 0.78rem; }
+  @media (max-width: 640px) {
+    .page { padding: 0 1.5rem; }
+    header { padding-top: 1.8rem; }
+    .header-email { display: none; }
+    
+    h1 { font-size: 2.4rem; margin-bottom: 2rem; }
+    .body-copy { font-size: 0.97rem; margin-bottom: 2.8rem; }
+    
+    /* Stack buttons for easier tapping */
+    .cta-row { 
+        flex-direction: column; 
+        align-items: flex-start; 
+        gap: 1.5rem; 
+    }
+    
+    .marquee-wrap { margin: 1.5rem -1.5rem 0; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .footer-links { gap: 1.5rem; }
   }
 </style>
 </head>
 <body>
+<div class="page">
 
-<nav>
-  <div class="nav-logo"><img src="dropcast-logo.png" alt="Dropcast" /></div>
-  <ul class="nav-links">
-    <li><a onclick="show('home')">Home</a></li>
-    <li><a onclick="show('about')">About</a></li>
-    <li><a onclick="show('work')">Work</a></li>
-    <li><a onclick="show('how')">How It Works</a></li>
-    <li><a onclick="show('contact')" class="nav-cta">Let's Collaborate</a></li>
-  </ul>
-  <!-- Hamburger for mobile -->
-  <div class="hamburger" onclick="toggleMenu()">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</nav>
+  <header>
+    <span class="logo-text">Dropcast</span>
+    <a href="mailto:hello@dropcast.co" class="header-email">hello@dropcast.co</a>
+  </header>
 
-<!-- Mobile dropdown menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a onclick="show('home'); closeMenu()">Home</a>
-  <a onclick="show('about'); closeMenu()">About</a>
-  <a onclick="show('work'); closeMenu()">Work</a>
-  <a onclick="show('how'); closeMenu()">How It Works</a>
-  <a onclick="show('contact'); closeMenu()">Let's Collaborate</a>
-</div>
-
-<!-- HOME -->
-<section id="home" class="active">
-  <div class="hero">
-    <div class="hero-left">
-      <div class="logo-mark"><img src="dropcast-logo.png" alt="Dropcast logo" /></div>
-      <div class="tagline">meaningful moments in public spaces</div>
-      <p class="hero-body">Here for the artists, creators and brands doing good in the world.</p>
-      <img src="DC-HP-1.png" alt="Campaign visual 1" style="width:300px;height:auto;" />
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>Artists</span><span class="accent">✦</span>
+      <span>Independent Brands</span><span class="accent">✦</span>
+      <span>NGOs</span><span class="accent">✦</span>
+      <span>Musicians</span><span class="accent">✦</span>
+      <span>Changemakers</span><span class="accent">✦</span>
+      <span>Public Spaces</span><span class="accent">✦</span>
+      <span>Real Stories</span><span class="accent">✦</span>
+      <span>Visible Impact</span><span class="accent">✦</span>
+      <span>Artists</span><span class="accent">✦</span>
+      <span>Independent Brands</span><span class="accent">✦</span>
+      <span>NGOs</span><span class="accent">✦</span>
+      <span>Musicians</span><span class="accent">✦</span>
+      <span>Changemakers</span><span class="accent">✦</span>
+      <span>Public Spaces</span><span class="accent">✦</span>
+      <span>Real Stories</span><span class="accent">✦</span>
+      <span>Visible Impact</span><span class="accent">✦</span>
     </div>
-    <div class="hero-center">
-      <div style="width:100%;padding-top:5rem;">
-        <img src="DC-HP-3.png" alt="Campaign visual 3" style="width:300px;height:auto;" />
+  </div>
+
+  <main>
+    <section class="hero-content">
+      <div class="eyebrow">Meaningful moments in public spaces</div>
+
+      <h1>The public screen,<br>for <em>stories that matter.</em></h1>
+
+      <div class="rule"></div>
+
+      <p class="body-copy">
+        Billboards, transit displays, and digital screens in shared spaces have always belonged to brands with big budgets. <strong>Dropcast changes that.</strong><br><br>
+        We give artists, independent labels, and creators access to the public screen — without the agency fees or the million-dollar minimums. What YouTube did for video, we're doing for the streets.
+      </p>
+
+      <div class="cta-row">
+        <a href="https://your-typeform-link.typeform.com/to/XXXXXX" target="_blank" class="btn-collab">Let's Collaborate</a>
+        <a href="mailto:hello@dropcast.co" class="cta-email">hello@dropcast.co</a>
       </div>
-    </div>
-    <div class="hero-right">
-      <div style="width:100%;padding-top:2rem;">
-        <img src="DC-HP-5.png" alt="Campaign visual 5" style="width:300px;height:auto;" />
-        <p class="hero-copy-right">What YouTube did for video, Canva did for design, and Bandcamp did for music, we're doing for public advertising spaces: Giving more airtime to impactful ideas.</p>
-      </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="email-section">
-    <div class="email-label">Stay in the loop</div>
-    <div class="email-form">
-      <input type="email" placeholder="Email Address" />
-      <button>Join</button>
-    </div>
-    <button class="collab-btn" onclick="show('contact')">Let's Collaborate</button>
-    <a href="mailto:hello@dropcast.co" class="contact-email">hello@dropcast.co</a>
-  </div>
+    <section class="hero-image-container">
+      <img src="https://images.unsplash.com/photo-1581338834647-b0fb40704e21?auto=format&fit=crop&q=80&w=800" alt="Creative portrait" class="portrait-img">
+    </section>
+  </main>
 
   <footer>
     <div>© 2026 Dropcast</div>
-    <div style="display:flex;gap:2rem;">
+    <div class="footer-links">
       <a href="#">Privacy</a>
       <a href="#">Terms</a>
-      <a href="mailto:hello@dropcast.co">hello@dropcast.co</a>
     </div>
   </footer>
-</section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="page-hero">
-    <div class="page-eyebrow">Our Story</div>
-    <h1 class="page-title">Meaningful<br>Moments <em>in Public Spaces</em></h1>
-    <p class="page-intro">We believe the most important stories deserve the most visible stages. Dropcast is the platform that makes public screen advertising accessible — not just for big brands, but for artists, creators, and changemakers.</p>
-  </div>
-  <div class="manifesto">
-    <p class="manifesto-text">"What podcasts did for radio, and what Canva did for design, we're doing for public screens: making them <span>accessible</span> to the stories that matter."</p>
-  </div>
-  <div class="about-grid">
-    <div class="about-panel">
-      <div class="panel-num">01</div>
-      <h3>The Problem</h3>
-      <p>Public screens — billboards, transit displays, digital kiosks — have always been the domain of corporations with massive budgets. The stories that actually matter rarely make it to the streets.</p>
-    </div>
-    <div class="about-panel">
-      <div class="panel-num">02</div>
-      <h3>Our Answer</h3>
-      <p>Dropcast is a platform that democratises access to public screens. We give artists, independent brands, and social enterprises the tools and reach previously reserved for multinationals.</p>
-    </div>
-    <div class="about-panel">
-      <div class="panel-num">03</div>
-      <h3>Who We're For</h3>
-      <p>Artists launching exhibitions. Brands building community. NGOs amplifying causes. Musicians dropping albums. Anyone with something real to say and the courage to say it loudly.</p>
-    </div>
-    <div class="about-panel">
-      <div class="panel-num">04</div>
-      <h3>The Vision</h3>
-      <p>A world where the screens in our shared spaces reflect the full richness of our culture — not just those who can afford a traditional agency. Public space, for the public good.</p>
-    </div>
-  </div>
-  <footer>
-    <div>© 2026 Dropcast</div>
-    <div style="display:flex;gap:2rem;">
-      <a href="#">Privacy</a>
-      <a href="mailto:hello@dropcast.co">hello@dropcast.co</a>
-    </div>
-  </footer>
-</section>
-
-<!-- WORK -->
-<section id="work">
-  <div class="work-header">
-    <div>
-      <div class="page-eyebrow">Selected Projects</div>
-      <h1 class="page-title" style="font-size:2.5rem;margin-bottom:0;">Stories we've told</h1>
-    </div>
-    <button class="collab-btn" onclick="show('contact')">Start Your Project</button>
-  </div>
-  <div class="work-grid">
-    <div class="work-card">
-      <div class="work-card-tag">Artist Campaign</div>
-      <h3>It's A Hoax</h3>
-      <p>A visual campaign for a conceptual artist exploring truth and spectacle, placed across 12 digital screens in high foot-traffic zones.</p>
-      <div class="work-card-visual">
-        <div class="mini-billboard">
-          <div class="mini-frame" style="padding-bottom:65%;background:#e0ddd6;">
-            <img src="https://images.unsplash.com/photo-1476231682828-37e571bc172f?w=400&q=80" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"/>
-          </div>
-          <div class="mini-post"></div><div class="mini-base"></div>
-        </div>
-      </div>
-    </div>
-    <div class="work-card">
-      <div class="work-card-tag">Brand Launch</div>
-      <h3>Summer Drop</h3>
-      <p>A seasonal campaign for an independent fashion label. Bold imagery, minimal copy — designed to stop foot traffic and spark curiosity.</p>
-      <div class="work-card-visual">
-        <div class="mini-billboard">
-          <div class="mini-frame" style="padding-bottom:65%;background:#d6dde0;">
-            <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=400&q=80" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"/>
-          </div>
-          <div class="mini-post"></div><div class="mini-base"></div>
-        </div>
-      </div>
-    </div>
-    <div class="work-card">
-      <div class="work-card-tag">Social Impact</div>
-      <h3>Spectrum</h3>
-      <p>A public art series celebrating neurodiversity, commissioned for display in three city centres during awareness week.</p>
-      <div class="work-card-visual">
-        <div class="mini-billboard">
-          <div class="mini-frame" style="padding-bottom:65%;background:#e0d6d6;">
-            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"/>
-          </div>
-          <div class="mini-post"></div><div class="mini-base"></div>
-        </div>
-      </div>
-    </div>
-    <div class="work-card">
-      <div class="work-card-tag">Music Release</div>
-      <h3>Album Drop</h3>
-      <p>Supporting an independent musician's LP launch with a city-wide billboard presence timed to release day.</p>
-      <div class="work-card-visual">
-        <div class="mini-billboard">
-          <div class="mini-frame" style="padding-bottom:65%;background:#dde0d6;">
-            <div class="placeholder">Your story here</div>
-          </div>
-          <div class="mini-post"></div><div class="mini-base"></div>
-        </div>
-      </div>
-    </div>
-    <div class="work-card">
-      <div class="work-card-tag">NGO Campaign</div>
-      <h3>Ocean Watch</h3>
-      <p>Environmental awareness campaign across coastal cities, pairing striking photography with data about ocean health.</p>
-      <div class="work-card-visual">
-        <div class="mini-billboard">
-          <div class="mini-frame" style="padding-bottom:65%;background:#d6dde0;">
-            <div class="placeholder">Your story here</div>
-          </div>
-          <div class="mini-post"></div><div class="mini-base"></div>
-        </div>
-      </div>
-    </div>
-    <div class="work-card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:var(--charcoal);color:white;" onclick="show('contact')">
-      <div style="font-family:'Georgia Pro',Georgia,serif;font-size:2.5rem;color:var(--red);margin-bottom:1rem;font-weight:700;">+</div>
-      <h3 style="color:white;margin-bottom:0.5rem;">Your Story</h3>
-      <p style="color:#888;">Ready to take your message to the streets?</p>
-      <button class="collab-btn" style="margin-top:1.5rem;">Get Started</button>
-    </div>
-  </div>
-  <footer>
-    <div>© 2026 Dropcast</div>
-    <div style="display:flex;gap:2rem;">
-      <a href="#">Privacy</a>
-      <a href="mailto:hello@dropcast.co">hello@dropcast.co</a>
-    </div>
-  </footer>
-</section>
-
-<!-- HOW IT WORKS -->
-<section id="how">
-  <div class="how-header">
-    <div class="page-eyebrow">The Process</div>
-    <h1 class="page-title">From idea to<br><em>public screen</em></h1>
-  </div>
-  <div class="steps">
-    <ul class="steps-list">
-      <li class="step-item">
-        <div class="step-num">01</div>
-        <div class="step-content">
-          <h3>Tell us your story</h3>
-          <p>Fill out our brief or drop us an email. Tell us who you are, what you're trying to say, and who you want to say it to. No jargon required.</p>
-        </div>
-      </li>
-      <li class="step-item">
-        <div class="step-num">02</div>
-        <div class="step-content">
-          <h3>We craft the campaign</h3>
-          <p>Our team helps shape your content for public screens — the right format, the right messaging, the right visual approach to stop people in their tracks.</p>
-        </div>
-      </li>
-      <li class="step-item">
-        <div class="step-num">03</div>
-        <div class="step-content">
-          <h3>Choose your screens</h3>
-          <p>Select from our network of digital billboards, transit displays, and digital kiosks. Choose locations by city, footfall, audience, or vibe.</p>
-        </div>
-      </li>
-      <li class="step-item">
-        <div class="step-num">04</div>
-        <div class="step-content">
-          <h3>Go live</h3>
-          <p>Your story goes up. We send you photos, impressions data, and the quiet satisfaction of knowing your work is being seen in the real world.</p>
-        </div>
-      </li>
-    </ul>
-    <div class="how-visual">
-      <svg width="280" height="340" viewBox="0 0 280 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="10" y="20" width="70" height="120" rx="10" stroke="#3A3A3A" stroke-width="2" fill="white"/>
-        <rect x="18" y="32" width="54" height="90" rx="4" stroke="#3A3A3A" stroke-width="1.5" fill="#F0EDE6"/>
-        <circle cx="45" cy="135" r="5" stroke="#3A3A3A" stroke-width="1.5" fill="none"/>
-        <line x1="38" y1="25" x2="52" y2="25" stroke="#3A3A3A" stroke-width="2" stroke-linecap="round"/>
-        <path d="M85 80 C120 80 130 60 150 50" stroke="#E05A3A" stroke-width="2" stroke-dasharray="6 4" stroke-linecap="round" fill="none"/>
-        <polygon points="150,44 158,54 142,54" fill="#E05A3A"/>
-        <rect x="158" y="10" width="100" height="140" rx="3" stroke="#3A3A3A" stroke-width="2" fill="white"/>
-        <rect x="164" y="16" width="88" height="128" rx="2" stroke="#3A3A3A" stroke-width="1" fill="#D9D5CD"/>
-        <circle cx="167" cy="19" r="4" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
-        <circle cx="249" cy="19" r="4" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
-        <circle cx="167" cy="141" r="4" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
-        <circle cx="249" cy="141" r="4" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
-        <line x1="208" y1="150" x2="208" y2="200" stroke="#3A3A3A" stroke-width="3" stroke-linecap="round"/>
-        <line x1="190" y1="200" x2="226" y2="200" stroke="#3A3A3A" stroke-width="3" stroke-linecap="round"/>
-        <rect x="30" y="230" width="60" height="100" rx="8" stroke="#3A3A3A" stroke-width="2" fill="white"/>
-        <rect x="36" y="236" width="48" height="80" rx="4" stroke="#3A3A3A" stroke-width="1" fill="#D9D5CD"/>
-        <rect x="36" y="316" width="48" height="14" rx="2" stroke="#3A3A3A" stroke-width="1" fill="#eee"/>
-        <line x1="60" y1="330" x2="60" y2="340" stroke="#3A3A3A" stroke-width="3" stroke-linecap="round"/>
-        <rect x="140" y="245" width="130" height="75" rx="8" stroke="#3A3A3A" stroke-width="2" fill="white"/>
-        <rect x="148" y="253" width="114" height="59" rx="4" stroke="#3A3A3A" stroke-width="1" fill="#D9D5CD"/>
-        <circle cx="152" cy="257" r="4" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
-        <circle cx="268" cy="257" r="4" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
-        <circle cx="152" cy="308" r="4" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
-        <circle cx="268" cy="308" r="4" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
-        <line x1="175" y1="320" x2="175" y2="340" stroke="#3A3A3A" stroke-width="2" stroke-linecap="round"/>
-        <line x1="245" y1="320" x2="245" y2="340" stroke="#3A3A3A" stroke-width="2" stroke-linecap="round"/>
-        <line x1="165" y1="340" x2="185" y2="340" stroke="#3A3A3A" stroke-width="2" stroke-linecap="round"/>
-        <line x1="235" y1="340" x2="255" y2="340" stroke="#3A3A3A" stroke-width="2" stroke-linecap="round"/>
-        <path d="M80 260 C100 260 110 255 125 258" stroke="#E05A3A" stroke-width="1.5" stroke-dasharray="5 3" fill="none" stroke-linecap="round"/>
-        <polygon points="125,253 133,260 125,264" fill="#E05A3A"/>
-      </svg>
-      <div style="text-align:center;max-width:240px;">
-        <p style="font-size:0.88rem;color:var(--mid);line-height:1.6;">Your content, deployed across billboards, kiosks, and transit screens in your chosen cities.</p>
-      </div>
-    </div>
-  </div>
-  <div style="background:var(--charcoal);color:white;padding:4rem 3rem;text-align:center;">
-    <div class="pill" style="border-color:var(--red);color:var(--red);">Pricing</div>
-    <h2 style="font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:1rem;">Accessible by design</h2>
-    <p style="font-size:0.95rem;color:#aaa;max-width:500px;margin:0 auto 2rem;line-height:1.7;">We price campaigns to be within reach for independent creators and small organisations. No agency markup. No minimum spend in the millions.</p>
-    <button class="collab-btn" onclick="show('contact')">Get a Quote</button>
-  </div>
-  <footer>
-    <div>© 2026 Dropcast</div>
-    <div style="display:flex;gap:2rem;">
-      <a href="#">Privacy</a>
-      <a href="mailto:hello@dropcast.co">hello@dropcast.co</a>
-    </div>
-  </footer>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-wrap">
-    <div class="contact-left">
-      <div class="page-eyebrow">Get In Touch</div>
-      <h1 class="page-title" style="font-size:2.8rem;">Let's tell your<br><em>story</em></h1>
-      <p style="font-size:0.92rem;line-height:1.7;color:var(--mid);margin-bottom:3rem;max-width:340px;">Whether you have a fully formed campaign or just an idea, we'd love to hear from you. Reach out and let's figure out how to get your story seen.</p>
-      <div class="contact-info-item">
-        <div class="ci-label">Email</div>
-        <div class="ci-val"><a href="mailto:hello@dropcast.co">hello@dropcast.co</a></div>
-      </div>
-      <div class="contact-info-item">
-        <div class="ci-label">For artists & creators</div>
-        <div class="ci-val">We have special rates. Just say hi.</div>
-      </div>
-      <div class="contact-info-item">
-        <div class="ci-label">Response time</div>
-        <div class="ci-val">We reply within 1–2 business days</div>
-      </div>
-      <div style="margin-top:3rem;">
-        <svg width="180" height="160" viewBox="0 0 180 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="10" y="10" width="160" height="100" rx="6" stroke="#3A3A3A" stroke-width="2" fill="none"/>
-          <rect x="18" y="18" width="144" height="84" rx="4" stroke="#3A3A3A" stroke-width="1.2" fill="#F0EDE6"/>
-          <text x="90" y="62" font-family="Georgia Pro, Georgia, serif" font-size="16" fill="#E05A3A" text-anchor="middle" font-style="italic">your story here</text>
-          <circle cx="18" cy="18" r="5" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
-          <circle cx="162" cy="18" r="5" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
-          <circle cx="18" cy="102" r="5" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
-          <circle cx="162" cy="102" r="5" stroke="#3A3A3A" stroke-width="1.5" fill="white"/>
-          <line x1="65" y1="110" x2="65" y2="148" stroke="#3A3A3A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="115" y1="110" x2="115" y2="148" stroke="#3A3A3A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="48" y1="148" x2="82" y2="148" stroke="#3A3A3A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="98" y1="148" x2="132" y2="148" stroke="#3A3A3A" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
-      </div>
-    </div>
-    <div class="contact-right">
-      <h2>Start a conversation</h2>
-      <div class="form-group">
-        <label>Your Name</label>
-        <input type="text" placeholder="Jane Smith" />
-      </div>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" placeholder="jane@studio.com" />
-      </div>
-      <div class="form-group">
-        <label>I am a...</label>
-        <select>
-          <option>Artist / Creator</option>
-          <option>Independent Brand</option>
-          <option>NGO / Social Enterprise</option>
-          <option>Musician</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Tell us about your project</label>
-        <textarea placeholder="What's the story you want to tell? What's the occasion, the audience, the vibe?"></textarea>
-      </div>
-      <button class="submit-btn">Send It →</button>
-    </div>
-  </div>
-  <footer>
-    <div>© 2026 Dropcast</div>
-    <div style="display:flex;gap:2rem;">
-      <a href="#">Privacy</a>
-      <a href="mailto:hello@dropcast.co">hello@dropcast.co</a>
-    </div>
-  </footer>
-</section>
-
-<script>
-  function show(id) {
-    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    window.scrollTo(0, 0);
-  }
-
-  function toggleMenu() {
-    document.getElementById('mobileMenu').classList.toggle('open');
-  }
-
-  function closeMenu() {
-    document.getElementById('mobileMenu').classList.remove('open');
-  }
-
-  // Close menu if clicking outside
-  document.addEventListener('click', function(e) {
-    const menu = document.getElementById('mobileMenu');
-    const hamburger = document.querySelector('.hamburger');
-    if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
-      menu.classList.remove('open');
-    }
-  });
-</script>
+</div>
 </body>
 </html>
+
