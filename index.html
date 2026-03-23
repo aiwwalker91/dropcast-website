@@ -10,7 +10,7 @@
     --cream: #F0EDE6;
     --red: #E05A3A;
     --red-dark: #C44828;
-    --charcoal: #2A2AChar;
+    --charcoal: #2A2A2A;
     --mid: #7A7570;
     --light: #DDD9D1;
   }
@@ -49,7 +49,6 @@
     padding: 0 3rem;
   }
 
-  /* ── Header ── */
   header {
     padding: 2rem 0;
     display: flex;
@@ -65,7 +64,7 @@
   }
   .header-email:hover { color: var(--red); }
 
-  /* ── Main Layout (Desktop Split) ── */
+  /* ── Main Layout ── */
   main {
     display: flex;
     flex-direction: row;
@@ -92,7 +91,7 @@
     animation: fadeUp 0.7s ease forwards;
   }
 
-  /* ── UPDATED: Fading Image Container ── */
+  /* ── Method 2: Aspect Ratio Container ── */
   .hero-image-container {
     flex: 0.8;
     display: flex;
@@ -100,36 +99,32 @@
     opacity: 0;
     animation: fadeUp 0.7s ease 0.4s forwards;
     
-    /* New styles for slideshow */
     position: relative; 
     width: 100%;
-    max-width: 400px; /* Match max portrait-img width */
-    height: 500px; /* Set a fixed height for the container (adjust as needed) */
-    list-style: none; /* Remove bullet points if using <ul> */
-    overflow: hidden; /* Keep images clipped */
+    max-width: 420px; 
+    aspect-ratio: 4 / 5; /* This ensures the 'box' stays the same shape */
+    list-style: none;
+    overflow: hidden;
     border-radius: 4px;
-    box-shadow: 20px 20px 60px rgba(0,0,0,0.05);
+    /* Removed fixed height to let aspect-ratio do the work */
   }
 
-  /* ── UPDATED: Individual Fading Images ── */
   .portrait-img {
-    position: absolute; /* Stack images */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Maintain aspect ratio */
-    
-    /* Initial state: Hidden */
+    /* KEY FIX: 'contain' ensures the whole image fits without cropping */
+    object-fit: contain; 
     opacity: 0; 
-    transition: opacity 1.5s ease-in-out; /* Smooth fade cross-transition */
+    transition: opacity 1.2s ease-in-out;
     z-index: 1;
   }
 
-  /* Active state: Visible */
   .portrait-img.active {
     opacity: 1;
-    z-index: 2; /* Bring active image to front */
+    z-index: 2;
   }
 
   /* ── Typography ── */
@@ -184,7 +179,6 @@
   .btn-collab:hover {
     background: var(--red-dark);
     transform: translateY(-2px);
-    box-shadow: 0 6px 22px rgba(224, 90, 58, 0.3);
   }
 
   .cta-email { font-size: 0.85rem; color: var(--mid); text-decoration: none; }
@@ -208,7 +202,7 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── Mobile Logic: Centered & Image Under Headline ── */
+  /* ── Mobile Layout ── */
   @media (max-width: 900px) {
     main { 
         flex-direction: column; 
@@ -222,25 +216,16 @@
         align-items: center;
     }
 
-    .main-logo {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
     .hero-image-container { 
         width: 100%; 
         justify-content: center; 
-        margin-top: 0; 
-        margin-bottom: 2.5rem; 
-        max-width: 220px; /* Mobile width */
-        height: 275px; /* Mobile height (adjust aspect ratio as needed) */
-        border-radius: 4px;
-        box-shadow: 10px 10px 30px rgba(0,0,0,0.05);
+        margin: 0 auto 2.5rem; 
+        max-width: 240px; /* Constrains the frame size on mobile */
+        aspect-ratio: 4 / 5;
     }
 
-    .body-copy {
-        margin-left: auto;
-        margin-right: auto;
+    .portrait-img {
+        object-fit: contain;
     }
 
     .cta-row {
@@ -251,10 +236,9 @@
   @media (max-width: 640px) {
     .page { padding: 0 1.5rem; }
     header { display: none; }
-    .main-logo { width: 220px; margin-bottom: 2rem; }
-    h1 { font-size: 1.6rem; margin-bottom: 1.5rem; }
+    .main-logo { width: 220px; }
+    h1 { font-size: 1.6rem; }
     .cta-row { flex-direction: column; gap: 1.2rem; }
-    footer { flex-direction: column; gap: 1rem; text-align: center; }
   }
 </style>
 </head>
@@ -271,7 +255,7 @@
       
       <h1><em>Meaningful moments in public spaces.</em></h1>
 
-      <div class="hero-image-container-placeholder"></div>
+      <div id="mobile-img-anchor"></div>
 
       <p class="body-copy">
         Public screentime has always belonged to brands with big budgets. <strong>Dropcast changes that,</strong> so artists, independent labels, and creators can show up in neighbourhoods around the world, as easily as posting on socials.<br><br>
@@ -285,9 +269,9 @@
     </section>
 
     <ul class="hero-image-container">
-      <li><img src="DC-HP-1.png" alt="Campaign Visual 1" class="portrait-img active"></li>
-      <li><img src="DC-HP-3.png" alt="Campaign Visual 2" class="portrait-img"></li>
-      <li><img src="DC-HP-5.png" alt="Campaign Visual 3" class="portrait-img"></li>
+      <li><img src="DC-HP-1.png" alt="Campaign 1" class="portrait-img active"></li>
+      <li><img src="your-image-2.jpg" alt="Campaign 2" class="portrait-img"></li>
+      <li><img src="your-image-3.jpg" alt="Campaign 3" class="portrait-img"></li>
     </ul>
   </main>
 
@@ -301,43 +285,32 @@
 </div>
 
 <script>
-    /* 1. Mobile Responsiveness: Move image container DOM position */
+    /* Move image container for mobile */
     function adjustImageLayout() {
         const imgContainer = document.querySelector('.hero-image-container');
-        const h1 = document.querySelector('h1');
+        const anchor = document.getElementById('mobile-img-anchor');
         const main = document.querySelector('main');
         
         if (window.innerWidth <= 900) {
-            // Place under H1 on Mobile
-            h1.insertAdjacentElement('afterend', imgContainer);
+            anchor.insertAdjacentElement('afterend', imgContainer);
         } else {
-            // Place at the end of Main on Desktop
             main.appendChild(imgContainer);
         }
     }
 
-    /* 2. Slideshow Logic: Handle the fading */
+    /* Slideshow Logic */
     function initSlideshow() {
-        const images = document.querySelectorAll('.hero-image-container .portrait-img');
+        const images = document.querySelectorAll('.portrait-img');
         let currentIndex = 0;
-        const fadeInterval = 5000; // Time each image stays visible (5 seconds)
-
-        // Ensure we have images to cycle
         if (images.length <= 1) return;
 
         setInterval(() => {
-            // Remove active class from current image (trigger fade out)
             images[currentIndex].classList.remove('active');
-
-            // Increment index, looping back to 0 if at the end
             currentIndex = (currentIndex + 1) % images.length;
-
-            // Add active class to new image (trigger fade in)
             images[currentIndex].classList.add('active');
-        }, fadeInterval);
+        }, 4000); // Transitions every 4 seconds
     }
 
-    // Initialize both functions on load and resize
     window.addEventListener('load', () => {
         adjustImageLayout();
         initSlideshow();
