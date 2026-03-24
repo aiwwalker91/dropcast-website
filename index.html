@@ -7,7 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #F0EDE6;
+    /* The core background color */
+    --cream: #F0EDE6; 
     --red: #E05A3A;
     --red-dark: #C44828;
     --charcoal: #2A2A2A;
@@ -19,13 +20,12 @@
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
+    background-color: var(--cream);
     color: var(--charcoal);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-    line-height: 1.6;
   }
 
   /* Subtle Grain Overlay */
@@ -51,13 +51,13 @@
     padding: 0 3rem;
   }
 
-  header { padding: 2rem 0; display: flex; justify-content: flex-end; }
+  header { padding: 2rem 0; }
 
   main {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 5rem;
+    gap: 4rem;
     padding: 2rem 0 5rem;
     flex: 1;
   }
@@ -66,31 +66,29 @@
     flex: 1.2;
     display: flex;
     flex-direction: column;
-    text-align: left;
   }
 
   .main-logo {
     display: block;
     width: 320px;
     max-width: 100%;
-    height: auto;
     margin-bottom: 2.5rem;
     opacity: 0;
     animation: fadeUp 0.7s ease forwards;
   }
 
+  /* Heading: All Orange-Red and Italicized */
   h1 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2.2rem, 4vw, 3.2rem); 
     line-height: 1.1;
     letter-spacing: -0.02em;
-    color: var(--charcoal);
+    color: var(--red);
+    font-style: italic;
     margin-bottom: 2rem;
     opacity: 0;
     animation: fadeUp 0.7s ease 0.2s forwards;
   }
-
-  h1 em { color: var(--red); font-style: italic; }
 
   .body-copy {
     font-size: 1.05rem;
@@ -104,7 +102,7 @@
 
   .body-copy strong { color: var(--charcoal); font-weight: 600; }
 
-  /* Steps Section */
+  /* Steps Section - Cleaned up to avoid 'strong>' bug */
   .steps-container {
     margin-bottom: 3.5rem;
     opacity: 0;
@@ -115,15 +113,15 @@
     font-size: 0.75rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--red);
+    color: var(--charcoal);
     margin-bottom: 1.5rem;
     font-weight: 700;
   }
 
   .step {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
     display: flex;
-    gap: 1rem;
+    gap: 1.2rem;
   }
 
   .step-num {
@@ -131,25 +129,25 @@
     font-style: italic;
     color: var(--red);
     font-weight: 700;
+    font-size: 1.1rem;
   }
 
-  .step-text strong { display: block; color: var(--charcoal); font-size: 0.95rem; }
-  .step-text p { font-size: 0.9rem; color: var(--mid); margin-top: 0.2rem; }
+  .step-text strong { display: block; color: var(--charcoal); font-size: 1rem; margin-bottom: 0.2rem; }
+  .step-text p { font-size: 0.95rem; color: var(--mid); line-height: 1.5; }
 
-  /* Image Container */
+  /* Slideshow Container */
   .hero-image-container {
     flex: 0.8;
     position: relative; 
     width: 100%;
-    max-width: 420px; 
+    max-width: 450px; 
     aspect-ratio: 4 / 5;
     list-style: none;
     overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    background: var(--light);
+    /* Matches site background so images blend seamlessly */
+    background-color: var(--cream); 
     opacity: 0;
-    animation: fadeUp 0.8s ease 0.5s forwards, float 6s ease-in-out infinite;
+    animation: fadeUp 0.8s ease 0.5s forwards;
   }
 
   .portrait-img {
@@ -158,9 +156,10 @@
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    /* KEY: ensures the whole image fits without cropping edges */
+    object-fit: contain; 
     opacity: 0; 
-    transition: opacity 1.2s ease-in-out;
+    transition: opacity 1s ease-in-out;
   }
 
   .portrait-img.active { opacity: 1; }
@@ -185,14 +184,13 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     font-weight: 700;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 10px 20px rgba(224, 90, 58, 0.2);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(224, 90, 58, 0.15);
   }
 
   .btn-collab:hover {
     background: var(--red-dark);
-    transform: translateY(-3px);
-    box-shadow: 0 15px 25px rgba(224, 90, 58, 0.3);
+    transform: translateY(-2px);
   }
 
   .cta-email { 
@@ -200,10 +198,7 @@
     color: var(--charcoal); 
     text-decoration: none; 
     border-bottom: 1px solid var(--light);
-    transition: all 0.2s;
   }
-
-  .cta-email:hover { border-color: var(--red); color: var(--red); }
 
   footer {
     padding: 3rem 0;
@@ -214,34 +209,17 @@
     color: var(--mid);
   }
 
-  .footer-links { display: flex; gap: 2rem; }
-  footer a { color: var(--mid); text-decoration: none; transition: color 0.2s; }
-  footer a:hover { color: var(--charcoal); }
-
-  /* Animations */
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  /* Mobile */
+  /* Mobile Tweaks */
   @media (max-width: 900px) {
     main { flex-direction: column; text-align: center; gap: 3rem; }
     .hero-content { align-items: center; }
-    .hero-image-container { max-width: 320px; }
+    .step { text-align: left; }
     .cta-row { flex-direction: column; gap: 1.5rem; }
-    .main-logo { width: 240px; margin: 0 auto 2rem; }
-  }
-
-  @media (max-width: 640px) {
-    .page { padding: 0 1.5rem; }
-    h1 { font-size: 2rem; }
-    footer { flex-direction: column; gap: 1.5rem; align-items: center; }
   }
 </style>
 </head>
@@ -254,7 +232,7 @@
     <section class="hero-content">
       <img src="dropcast-logo.png" alt="Dropcast Logo" class="main-logo">
       
-      <h1><em>Meaningful moments</em> in public spaces.</h1>
+      <h1>Meaningful moments in public spaces.</h1>
 
       <div id="mobile-img-anchor"></div>
 
@@ -265,20 +243,23 @@
 
       <div class="steps-container">
         <h4>How it works</h4>
+        
         <div class="step">
           <span class="step-num">01.</span>
           <div class="step-text">
             <strong>Share your link</strong>
-            <p>Send us a post via WhatsApp or DM. Tell us your budget and where you want to be seen.</p>
+            <p>Send us a post via WhatsApp, Instagram DM, or Email. Tell us your budget and where you want to be seen.</p>
           </div>
         </div>
+
         <div class="step">
           <span class="step-num">02.</span>
           <div class="step-text">
             <strong>Approve the visual</strong>
-            <p>We reformat your content into a high-impact design and send it back for sign-off.</p>
+            <p>We reformat your content into a high-impact billboard design and send it back for your sign-off.</p>
           </div>
         </div>
+
         <div class="step">
           <span class="step-num">03.</span>
           <div class="step-text">
@@ -305,19 +286,19 @@
 
   <footer>
     <div>© 2026 Dropcast</div>
-    <div class="footer-links">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
+    <div style="display:flex; gap:20px;">
+      <a href="#" style="color:inherit; text-decoration:none;">Privacy</a>
+      <a href="#" style="color:inherit; text-decoration:none;">Terms</a>
     </div>
   </footer>
 </div>
 
 <script>
+    /* Mobile Layout Adjustment */
     function adjustImageLayout() {
         const imgContainer = document.querySelector('.hero-image-container');
         const anchor = document.getElementById('mobile-img-anchor');
         const main = document.querySelector('main');
-        
         if (window.innerWidth <= 900) {
             anchor.insertAdjacentElement('afterend', imgContainer);
         } else {
@@ -325,6 +306,7 @@
         }
     }
 
+    /* Slideshow Logic */
     function initSlideshow() {
         const images = document.querySelectorAll('.portrait-img');
         let currentIndex = 0;
