@@ -3,22 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dropcast: Meaningful Moments in Public Spaces</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;700&display=swap" rel="stylesheet">
+<title>dropcast: Meaningful Moments in Public Spaces</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* ─── Brand Tokens (Brand Guidelines v1.0) ─────────────────────────── */
   :root {
-    --cream: #F0EDE6; 
-    --red: #E05A3A;
-    --red-dark: #C44828;
-    --charcoal: #2A2A2A;
-    --mid: #7A7570;
-    --light: #DDD9D1;
+    --coral:        #E8461C;   /* Primary accent, CTAs, wordmark on cream */
+    --coral-dark:   #C93A14;   /* Hover state */
+    --cream:        #F5EDE3;   /* Default page background */
+    --charcoal:     #1A1A1A;   /* Primary text, headings */
+    --warm-neutral: #C9B5A8;   /* Secondary text, borders, dividers */
+    --white:        #FFFFFF;   /* Cards, form fields, tables */
+
+    /* Typography */
+    --font-serif: Georgia, serif;           /* Display, wordmark, taglines, quotes */
+    --font-sans:  'Manrope', system-ui, sans-serif; /* Body, UI, navigation */
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--font-sans);
     background-color: var(--cream);
     color: var(--charcoal);
     min-height: 100vh;
@@ -27,6 +32,7 @@
     overflow-x: hidden;
   }
 
+  /* Subtle grain texture over everything */
   body::before {
     content: '';
     position: fixed;
@@ -37,9 +43,9 @@
     opacity: 0.4;
   }
 
-  /* Page Transitions */
+  /* ─── View / Page transitions (300–500ms, ease-out entrance) ── */
   .view { display: none; }
-  .view.active { display: flex; animation: fadeIn 0.5s ease forwards; }
+  .view.active { display: flex; animation: fadeIn 0.4s ease-out forwards; }
 
   .page {
     position: relative;
@@ -63,104 +69,309 @@
     flex: 1;
   }
 
-  /* Legal Content Styling */
+  /* ─── Legal pages ───────────────────────────────────────────── */
   .legal-content {
     padding: 4rem 0 8rem;
     max-width: 800px;
     margin: 0 auto;
   }
 
-  .legal-content h1 { font-style: normal; margin-bottom: 1rem; }
-  .legal-content h2 { font-family: 'Playfair Display', serif; margin: 2rem 0 1rem; color: var(--red); }
-  .legal-content p { margin-bottom: 1.2rem; line-height: 1.6; color: var(--mid); }
-  .legal-content ul { margin-bottom: 1.5rem; padding-left: 1.5rem; color: var(--mid); }
-  .legal-content li { margin-bottom: 0.5rem; line-height: 1.6; }
+  /* Wordmark styling in legal headings */
+  .legal-content h1 {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin-bottom: 1rem;
+  }
+
+  .legal-content h2 {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 2rem 0 0.75rem;
+    color: var(--coral);
+  }
+
+  .legal-content p {
+    margin-bottom: 1.2rem;
+    line-height: 1.6;
+    color: var(--warm-neutral);
+    font-size: 0.95rem;
+  }
+
+  .legal-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    color: var(--warm-neutral);
+  }
+
+  .legal-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
 
   .back-link {
     display: inline-block;
     margin-bottom: 2rem;
-    color: var(--red);
+    color: var(--coral);
     text-decoration: none;
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
+    transition: color 0.3s ease-out;
   }
 
-  /* Original Hero Styles */
+  .back-link:hover { color: var(--coral-dark); }
+
+  /* ─── Hero layout ───────────────────────────────────────────── */
   .hero-content { flex: 1.2; display: flex; flex-direction: column; }
-  .main-logo { display: block; width: 320px; max-width: 100%; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.7s ease forwards; }
-  h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.1; letter-spacing: -0.02em; color: var(--red); font-style: italic; margin-bottom: 2rem; }
-  .body-copy { font-size: 1.05rem; color: var(--mid); max-width: 520px; margin-bottom: 2.5rem; font-weight: 300; }
-  .body-copy strong { color: var(--charcoal); font-weight: 600; }
-  .steps-container { margin-bottom: 3.5rem; }
-  h4 { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--charcoal); margin-bottom: 1.5rem; font-weight: 700; }
-  .step { margin-bottom: 1.5rem; display: flex; gap: 1.2rem; }
-  .step-num { font-family: 'Playfair Display', serif; font-style: italic; color: var(--red); font-weight: 700; font-size: 1.1rem; }
-  .step-text strong { display: block; color: var(--charcoal); font-size: 1rem; margin-bottom: 0.2rem; }
-  .step-text p { font-size: 0.95rem; color: var(--mid); line-height: 1.5; }
 
-  .hero-image-container {
-    flex: 0.8; position: relative; width: 100%; max-width: 450px; aspect-ratio: 4 / 5;
-    list-style: none; overflow: hidden; background-color: var(--cream);
+  .main-logo {
+    display: block;
+    width: 300px;
+    max-width: 100%;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease-out forwards;
   }
 
-  .portrait-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 1s ease-in-out; }
+  /* ─── Wordmark rule: Georgia, bold, lowercase, coral ─────────
+     Used inline where we render the brand name as text (no image). */
+  .wordmark {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    color: var(--coral);
+    font-style: normal;
+  }
+
+  /* ─── Tagline rule: Georgia, bold+italic on "moments" & "public" ── */
+  h1.tagline {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 3.8vw, 3rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--charcoal);
+    font-style: normal;
+    font-weight: 400;
+    margin-bottom: 2rem;
+  }
+
+  h1.tagline em {
+    font-style: italic;
+    font-weight: 700;
+    color: var(--coral);
+  }
+
+  /* Section label (uppercase, letter-spaced, warm-neutral, bold, small) */
+  .section-label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--warm-neutral);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .body-copy {
+    font-size: 1rem;
+    color: var(--warm-neutral);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .body-copy strong {
+    color: var(--charcoal);
+    font-weight: 600;
+  }
+
+  /* ─── How it works ──────────────────────────────────────────── */
+  .steps-container { margin-bottom: 3.5rem; }
+
+  .step { margin-bottom: 1.5rem; display: flex; gap: 1.2rem; }
+
+  .step-num {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--coral);
+    font-weight: 700;
+    font-size: 1.05rem;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+
+  .step-text strong {
+    display: block;
+    color: var(--charcoal);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+
+  .step-text p {
+    font-size: 0.9rem;
+    color: var(--warm-neutral);
+    line-height: 1.6;
+  }
+
+  /* ─── Hero image slideshow ───────────────────────────────────── */
+  .hero-image-container {
+    flex: 0.8;
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 4 / 5;
+    list-style: none;
+    overflow: hidden;
+    background-color: var(--cream);
+  }
+
+  .portrait-img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out; /* 800ms max, ease-in-out for state changes */
+  }
+
   .portrait-img.active { opacity: 1; }
 
-  .cta-row { display: flex; align-items: center; gap: 2.5rem; }
-  .btn-collab {
-    display: inline-block; background: var(--red); color: white; padding: 1.1rem 2.5rem; border-radius: 50px;
-    text-decoration: none; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700;
-    transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(224, 90, 58, 0.15);
-  }
-  .btn-collab:hover { background: var(--red-dark); transform: translateY(-2px); }
-  .cta-email { font-size: 0.9rem; color: var(--charcoal); text-decoration: none; border-bottom: 1px solid var(--light); }
+  /* ─── CTA row ────────────────────────────────────────────────── */
+  .cta-row { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
 
+  /* Primary CTA: coral bg, white text, 8px border-radius, specified padding */
+  .btn-primary {
+    display: inline-block;
+    background: var(--coral);
+    color: var(--white);
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background 0.3s ease-out, transform 0.3s ease-out;
+    box-shadow: 0 6px 20px rgba(232, 70, 28, 0.18);
+  }
+
+  .btn-primary:hover {
+    background: var(--coral-dark);
+    transform: translateY(-2px);
+  }
+
+  /* Secondary: email link, understated */
+  .cta-email {
+    font-size: 0.875rem;
+    color: var(--charcoal);
+    text-decoration: none;
+    border-bottom: 1px solid var(--warm-neutral);
+    padding-bottom: 1px;
+    transition: border-color 0.3s ease-out, color 0.3s ease-out;
+  }
+
+  .cta-email:hover {
+    color: var(--coral);
+    border-color: var(--coral);
+  }
+
+  /* ─── Footer ─────────────────────────────────────────────────── */
   footer {
-    padding: 3rem 0; display: flex; justify-content: space-between;
-    border-top: 1px solid var(--light); font-size: 0.8rem; color: var(--mid);
+    padding: 2.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #E0D5C8; /* warm neutral border */
+    font-size: 0.78rem;
+    color: var(--warm-neutral);
     margin-top: auto;
   }
 
+  footer a {
+    color: var(--warm-neutral);
+    text-decoration: none;
+    transition: color 0.3s ease-out;
+  }
+
+  footer a:hover { color: var(--coral); }
+
+  footer nav { display: flex; gap: 1.5rem; }
+
+  /* ─── Animations (300–500ms, ease-out entrances) ──────────────── */
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   @keyframes fadeIn {
     from { opacity: 0; }
-    to { opacity: 1; }
+    to   { opacity: 1; }
   }
 
-  .fade-in-up { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+  .fade-in-up {
+    opacity: 0;
+    animation: fadeUp 0.6s ease-out forwards;
+  }
 
+  /* ─── Responsive ─────────────────────────────────────────────── */
   @media (max-width: 900px) {
-    main { flex-direction: column; text-align: center; gap: 3rem; }
+    main { flex-direction: column; text-align: center; gap: 2.5rem; }
     .hero-content { align-items: center; }
+    .body-copy { text-align: left; }
     .step { text-align: left; }
-    .cta-row { flex-direction: column; gap: 1.5rem; }
+    .cta-row { flex-direction: column; gap: 1.25rem; align-items: center; }
     .page { padding: 0 1.5rem; }
-    footer { flex-direction: column; gap: 1.5rem; align-items: center; text-align: center; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+
+  /* Respect reduced-motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in-up, .main-logo { animation: none; opacity: 1; }
+    .portrait-img { transition: none; }
+    .view.active { animation: none; }
+    .btn-primary:hover { transform: none; }
   }
 </style>
 </head>
 <body>
 
+<!-- ═══════════════════════════════════════════════════════════════
+     HOME VIEW
+═══════════════════════════════════════════════════════════════ -->
 <div id="home-view" class="page view active">
   <header></header>
+
   <main>
     <section class="hero-content">
-      <img src="dropcast-logo.png" alt="Dropcast Logo" class="main-logo">
-      <h1 class="fade-in-up" style="animation-delay: 0.2s;">Meaningful moments in public spaces.</h1>
+      <!-- Logo image: full lockup (swirl + wordmark + tagline) for hero -->
+      <img src="dropcast-logo.png" alt="dropcast — meaningful moments in public spaces" class="main-logo">
+
+      <!-- Tagline: Georgia, "moments" and "public" in bold italic coral -->
+      <h1 class="tagline fade-in-up" style="animation-delay: 0.15s;">
+        Meaningful <em>moments</em> in <em>public</em> spaces.
+      </h1>
+
       <div id="mobile-img-anchor"></div>
-      <p class="body-copy fade-in-up" style="animation-delay: 0.3s;">
-        Public screentime has always belonged to the deepest wallets. <strong>Dropcast changes that.</strong><br><br>
-        What Bandcamp did for music, we're doing for global adspace, so showing up around the world is <strong>as easy as posting on socials</strong>.
+
+      <p class="body-copy fade-in-up" style="animation-delay: 0.25s;">
+        Public screentime has always belonged to the deepest wallets.
+        <strong>dropcast changes that.</strong><br><br>
+        What Bandcamp did for music, we're doing for global adspace — so showing up
+        around the world is <strong>as easy as posting on socials</strong>.
       </p>
 
-      <div class="steps-container fade-in-up" style="animation-delay: 0.4s;">
-        <h4>How it works</h4>
+      <div class="steps-container fade-in-up" style="animation-delay: 0.35s;">
+        <!-- Section label: uppercase, letter-spaced, warm-neutral, bold -->
+        <span class="section-label">How it works</span>
+
         <div class="step">
           <span class="step-num">01.</span>
           <div class="step-text">
@@ -168,6 +379,7 @@
             <p>Send us a post via WhatsApp, Instagram DM, or Email. Tell us your budget and goal.</p>
           </div>
         </div>
+
         <div class="step">
           <span class="step-num">02.</span>
           <div class="step-text">
@@ -175,172 +387,191 @@
             <p>We reformat your content into a high-impact billboard design and send it back for your sign-off.</p>
           </div>
         </div>
+
         <div class="step">
           <span class="step-num">03.</span>
           <div class="step-text">
             <strong>See it live</strong>
-            <p>Watch your work come to life in under 24 hours!</p>
+            <p>Watch your work come to life in under 24 hours.</p>
           </div>
         </div>
       </div>
 
-      <div class="cta-row fade-in-up" style="animation-delay: 0.5s;">
-        <a href="https://wa.me/351920287566" target="_blank" rel="noopener noreferrer" class="btn-collab">Let's Collaborate</a>
+      <div class="cta-row fade-in-up" style="animation-delay: 0.45s;">
+        <!-- Primary CTA: coral bg, white text, 8px radius, 14/28px padding -->
+        <a href="https://wa.me/351920287566" target="_blank" rel="noopener noreferrer" class="btn-primary">
+          Let's Collaborate
+        </a>
         <a href="mailto:hello@dropcast.co" class="cta-email">hello@dropcast.co</a>
       </div>
     </section>
 
-    <ul class="hero-image-container fade-in-up" style="animation-delay: 0.6s;">
-      <li><img src="DC-HP-1.png" alt="Campaign 1" class="portrait-img active"></li>
-      <li><img src="DC-HP-2.png" alt="Campaign 2" class="portrait-img"></li>
-      <li><img src="DC-HP-3.png" alt="Campaign 3" class="portrait-img"></li>
-      <li><img src="DC-HP-4.png" alt="Campaign 4" class="portrait-img"></li>
-      <li><img src="DC-HP-5.png" alt="Campaign 5" class="portrait-img"></li>
+    <!-- Hero image slideshow -->
+    <ul class="hero-image-container fade-in-up" style="animation-delay: 0.55s;">
+      <li><img src="DC-HP-1.png" alt="dropcast campaign: charity billboard in a public space" class="portrait-img active"></li>
+      <li><img src="DC-HP-2.png" alt="dropcast campaign: arts organisation billboard" class="portrait-img"></li>
+      <li><img src="DC-HP-3.png" alt="dropcast campaign: social enterprise billboard" class="portrait-img"></li>
+      <li><img src="DC-HP-4.png" alt="dropcast campaign: community group billboard" class="portrait-img"></li>
+      <li><img src="DC-HP-5.png" alt="dropcast campaign: purpose-driven billboard" class="portrait-img"></li>
     </ul>
   </main>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════════
+     TERMS VIEW
+═══════════════════════════════════════════════════════════════ -->
 <div id="terms-view" class="page view">
-    <div class="legal-content">
-        <a href="#" onclick="showView('home-view')" class="back-link">← Back to Home</a>
-        <h1>Terms of Service</h1>
-        <p><em>Last updated: 14 March 2026</em></p>
-        
-        <h2>1. About these terms</h2>
-        <p>These Terms of Service ("Terms") govern your use of the Dropcast platform operated by Dropcast Ltd, a company registered in England and Wales. By creating an account or using our services, you agree to be bound by these Terms.</p>
-        
-        <h2>2. Your account</h2>
-        <p>You must be at least 18 years old to create an account. You are responsible for maintaining the security of your account credentials and for all activity that occurs under your account. You must provide accurate and complete information when registering.</p>
-        
-        <h2>3. Acceptable use</h2>
-        <p>You agree to use Dropcast only for lawful purposes. Content displayed on screens must comply with UK advertising standards (ASA/CAP codes) and our Acceptable Use Policy. We reserve the right to reject or remove content that violates these standards.</p>
-        
-        <h2>4. Campaigns and content</h2>
-        <p>You retain ownership of all creative content you upload. By uploading content, you grant Dropcast a non-exclusive licence to display it on selected screens for the duration of your campaign. You confirm that you have all necessary rights and permissions to use the content you upload.</p>
-        
-        <h2>5. Payments and pricing</h2>
-        <p>Campaign pricing is displayed before purchase and varies based on screen location, duration and format. All prices are in GBP and inclusive of VAT where applicable. Payments are processed securely through our payment provider. Refunds are handled on a case-by-case basis and are not guaranteed once a campaign has gone live.</p>
-        
-        <h2>6. Charity and social enterprise discounts</h2>
-        <p>Registered charities, community interest companies (CICs) and social enterprises may be eligible for a 10% discount. We may request evidence of registration (such as a Charity Commission number) to verify eligibility.</p>
-        
-        <h2>7. Intellectual property</h2>
-        <p>The Dropcast platform, brand, logo and all related materials are owned by Dropcast Ltd. You may not copy, modify, distribute or reverse-engineer any part of the platform without our written permission.</p>
-        
-        <h2>8. Limitation of liability</h2>
-        <p>Dropcast provides the platform on an "as is" basis. While we work to ensure screens display your content as scheduled, we cannot guarantee uninterrupted service. Our liability to you is limited to the amount you have paid for the affected campaign.</p>
-        
-        <h2>9. Termination</h2>
-        <p>You may close your account at any time by contacting us. We may suspend or terminate accounts that violate these Terms. On termination, any active campaigns will be cancelled and a pro-rata refund may be issued at our discretion.</p>
-        
-        <h2>10. Changes to these terms</h2>
-        <p>We may update these Terms from time to time. We will notify you of significant changes by email or through the platform. Continued use of Dropcast after changes take effect constitutes acceptance of the updated Terms.</p>
-        
-        <h2>11. Governing law</h2>
-        <p>These Terms are governed by the laws of England and Wales. Any disputes shall be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
-        
-        <h2>12. Contact</h2>
-        <p>If you have any questions about these Terms, please contact us at hello@dropcast.co.</p>
-    </div>
+  <div class="legal-content">
+    <a href="#" onclick="showView('home-view')" class="back-link">← Back to Home</a>
+    <h1>Terms of Service</h1>
+    <p><em>Last updated: 14 March 2026</em></p>
+
+    <h2>1. About these terms</h2>
+    <p>These Terms of Service ("Terms") govern your use of the <span class="wordmark">dropcast</span> platform operated by Dropcast Ltd, a company registered in England and Wales. By creating an account or using our services, you agree to be bound by these Terms.</p>
+
+    <h2>2. Your account</h2>
+    <p>You must be at least 18 years old to create an account. You are responsible for maintaining the security of your account credentials and for all activity that occurs under your account. You must provide accurate and complete information when registering.</p>
+
+    <h2>3. Acceptable use</h2>
+    <p>You agree to use <span class="wordmark">dropcast</span> only for lawful purposes. Content displayed on screens must comply with UK advertising standards (ASA/CAP codes) and our Acceptable Use Policy. We reserve the right to reject or remove content that violates these standards.</p>
+
+    <h2>4. Campaigns and content</h2>
+    <p>You retain ownership of all creative content you upload. By uploading content, you grant <span class="wordmark">dropcast</span> a non-exclusive licence to display it on selected screens for the duration of your campaign. You confirm that you have all necessary rights and permissions to use the content you upload.</p>
+
+    <h2>5. Payments and pricing</h2>
+    <p>Campaign pricing is displayed before purchase and varies based on screen location, duration and format. All prices are in GBP and inclusive of VAT where applicable. Payments are processed securely through our payment provider. Refunds are handled on a case-by-case basis and are not guaranteed once a campaign has gone live.</p>
+
+    <h2>6. Charity and social enterprise discounts</h2>
+    <p>Registered charities, community interest companies (CICs) and social enterprises may be eligible for a 10% discount. We may request evidence of registration (such as a Charity Commission number) to verify eligibility.</p>
+
+    <h2>7. Intellectual property</h2>
+    <p>The <span class="wordmark">dropcast</span> platform, brand, logo and all related materials are owned by Dropcast Ltd. You may not copy, modify, distribute or reverse-engineer any part of the platform without our written permission.</p>
+
+    <h2>8. Limitation of liability</h2>
+    <p><span class="wordmark">dropcast</span> provides the platform on an "as is" basis. While we work to ensure screens display your content as scheduled, we cannot guarantee uninterrupted service. Our liability to you is limited to the amount you have paid for the affected campaign.</p>
+
+    <h2>9. Termination</h2>
+    <p>You may close your account at any time by contacting us. We may suspend or terminate accounts that violate these Terms. On termination, any active campaigns will be cancelled and a pro-rata refund may be issued at our discretion.</p>
+
+    <h2>10. Changes to these terms</h2>
+    <p>We may update these Terms from time to time. We will notify you of significant changes by email or through the platform. Continued use of <span class="wordmark">dropcast</span> after changes take effect constitutes acceptance of the updated Terms.</p>
+
+    <h2>11. Governing law</h2>
+    <p>These Terms are governed by the laws of England and Wales. Any disputes shall be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+
+    <h2>12. Contact</h2>
+    <p>If you have any questions about these Terms, please contact us at <a href="mailto:hello@dropcast.co" style="color: var(--coral);">hello@dropcast.co</a>.</p>
+  </div>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════════
+     PRIVACY VIEW
+═══════════════════════════════════════════════════════════════ -->
 <div id="privacy-view" class="page view">
-    <div class="legal-content">
-        <a href="#" onclick="showView('home-view')" class="back-link">← Back to Home</a>
-        <h1>Privacy Policy</h1>
-        <p><em>Last updated: 14 March 2026</em></p>
-        
-        <h2>1. Who we are</h2>
-        <p>Dropcast Ltd ("Dropcast", "we", "us") is the data controller for the personal data we collect through the Dropcast platform. We are registered in England and Wales and committed to protecting your privacy in accordance with the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018.</p>
-        
-        <h2>2. What data we collect</h2>
-        <p>When you use Dropcast, we may collect the following personal data:</p>
-        <ul>
-            <li>Name, email address and organisation details (provided during registration)</li>
-            <li>Campaign content and creative assets you upload</li>
-            <li>Payment information (processed by our payment provider, not stored by us)</li>
-            <li>Usage data such as pages visited, features used and time spent on the platform</li>
-            <li>Technical data including IP address, browser type and device information</li>
-        </ul>
+  <div class="legal-content">
+    <a href="#" onclick="showView('home-view')" class="back-link">← Back to Home</a>
+    <h1>Privacy Policy</h1>
+    <p><em>Last updated: 14 March 2026</em></p>
 
-        <h2>3. How we use your data</h2>
-        <p>We use your personal data to:</p>
-        <ul>
-            <li>Provide and maintain your Dropcast account</li>
-            <li>Process and display your advertising campaigns</li>
-            <li>Send you service-related communications</li>
-            <li>Improve the platform and develop new features</li>
-            <li>Comply with legal obligations</li>
-        </ul>
+    <h2>1. Who we are</h2>
+    <p>Dropcast Ltd ("<span class="wordmark">dropcast</span>", "we", "us") is the data controller for the personal data we collect through the <span class="wordmark">dropcast</span> platform. We are registered in England and Wales and committed to protecting your privacy in accordance with the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018.</p>
 
-        <h2>4. Legal basis for processing</h2>
-        <p>We process your data based on: contractual necessity, legitimate interests, consent, and legal obligation.</p>
+    <h2>2. What data we collect</h2>
+    <p>When you use <span class="wordmark">dropcast</span>, we may collect the following personal data:</p>
+    <ul>
+      <li>Name, email address and organisation details (provided during registration)</li>
+      <li>Campaign content and creative assets you upload</li>
+      <li>Payment information (processed by our payment provider, not stored by us)</li>
+      <li>Usage data such as pages visited, features used and time spent on the platform</li>
+      <li>Technical data including IP address, browser type and device information</li>
+    </ul>
 
-        <h2>5. Third-party services</h2>
-        <p>We use the following third-party services: Vercel, Neon, Mapbox, and Stripe. Each has their own privacy policies.</p>
+    <h2>3. How we use your data</h2>
+    <p>We use your personal data to:</p>
+    <ul>
+      <li>Provide and maintain your <span class="wordmark">dropcast</span> account</li>
+      <li>Process and display your advertising campaigns</li>
+      <li>Send you service-related communications</li>
+      <li>Improve the platform and develop new features</li>
+      <li>Comply with legal obligations</li>
+    </ul>
 
-        <h2>6. Data retention</h2>
-        <p>We retain your personal data for as long as your account is active. If you close your account, we will delete your data within 30 days.</p>
+    <h2>4. Legal basis for processing</h2>
+    <p>We process your data based on: contractual necessity, legitimate interests, consent, and legal obligation.</p>
 
-        <h2>7. Your rights</h2>
-        <p>Under UK GDPR, you have the right to access, correct, delete, or object to the processing of your data. Contact us at hello@dropcast.co to exercise these rights.</p>
+    <h2>5. Third-party services</h2>
+    <p>We use the following third-party services: Vercel, Neon, Mapbox, and Stripe. Each has their own privacy policies.</p>
 
-        <h2>8. Cookies</h2>
-        <p>We use essential cookies to keep you signed in and maintain your session.</p>
+    <h2>6. Data retention</h2>
+    <p>We retain your personal data for as long as your account is active. If you close your account, we will delete your data within 30 days.</p>
 
-        <h2>9. Contact and complaints</h2>
-        <p>If you have questions, contact us at hello@dropcast.co. You may also lodge a complaint with the ICO (ico.org.uk).</p>
-    </div>
+    <h2>7. Your rights</h2>
+    <p>Under UK GDPR, you have the right to access, correct, delete, or object to the processing of your data. Contact us at <a href="mailto:hello@dropcast.co" style="color: var(--coral);">hello@dropcast.co</a> to exercise these rights.</p>
+
+    <h2>8. Cookies</h2>
+    <p>We use essential cookies to keep you signed in and maintain your session.</p>
+
+    <h2>9. Contact and complaints</h2>
+    <p>If you have questions, contact us at <a href="mailto:hello@dropcast.co" style="color: var(--coral);">hello@dropcast.co</a>. You may also lodge a complaint with the ICO at ico.org.uk.</p>
+  </div>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER (always visible)
+═══════════════════════════════════════════════════════════════ -->
 <div class="page" style="flex: 0;">
   <footer>
-    <div>© 2026 Dropcast</div>
-    <div style="display:flex; gap:20px;">
-      <a href="#" onclick="showView('privacy-view')" style="color:inherit; text-decoration:none;">Privacy</a>
-      <a href="#" onclick="showView('terms-view')" style="color:inherit; text-decoration:none;">Terms</a>
-    </div>
+    <div>© 2026 Dropcast Ltd</div>
+    <nav>
+      <a href="#" onclick="showView('privacy-view')">Privacy</a>
+      <a href="#" onclick="showView('terms-view')">Terms</a>
+    </nav>
   </footer>
 </div>
 
 <script>
-    // Navigation Function
-    function showView(viewId) {
-        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-        document.getElementById(viewId).classList.add('active');
-        window.scrollTo(0, 0);
+  /* ── Navigation ───────────────────────────────────────────────── */
+  function showView(viewId) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById(viewId).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  /* ── Responsive image placement ──────────────────────────────── */
+  function adjustImageLayout() {
+    const imgContainer = document.querySelector('.hero-image-container');
+    const anchor = document.getElementById('mobile-img-anchor');
+    const main = document.querySelector('main');
+    if (!imgContainer || !anchor || !main) return;
+
+    if (window.innerWidth <= 900) {
+      anchor.insertAdjacentElement('afterend', imgContainer);
+    } else {
+      main.appendChild(imgContainer);
     }
+  }
 
-    function adjustImageLayout() {
-        const imgContainer = document.querySelector('.hero-image-container');
-        const anchor = document.getElementById('mobile-img-anchor');
-        const main = document.querySelector('main');
-        if (!imgContainer || !anchor || !main) return;
-        
-        if (window.innerWidth <= 900) {
-            anchor.insertAdjacentElement('afterend', imgContainer);
-        } else {
-            main.appendChild(imgContainer);
-        }
-    }
+  /* ── Slideshow (ease-in-out transition, 3.5s interval) ────────
+     Motion brand rule: transitions 300–500ms; state changes ease-in-out.
+     The transition is set in CSS (0.8s — within the 800ms ceiling).        */
+  function initSlideshow() {
+    const images = document.querySelectorAll('.portrait-img');
+    let currentIndex = 0;
+    if (images.length <= 1) return;
 
-    function initSlideshow() {
-        const images = document.querySelectorAll('.portrait-img');
-        let currentIndex = 0;
-        if (images.length <= 1) return;
+    setInterval(() => {
+      images[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex + 1) % images.length;
+      images[currentIndex].classList.add('active');
+    }, 3500);
+  }
 
-        setInterval(() => {
-            images[currentIndex].classList.remove('active');
-            currentIndex = (currentIndex + 1) % images.length;
-            images[currentIndex].classList.add('active');
-        }, 3500);
-    }
+  window.addEventListener('load', () => {
+    adjustImageLayout();
+    initSlideshow();
+  });
 
-    window.addEventListener('load', () => {
-        adjustImageLayout();
-        initSlideshow();
-    });
-    window.addEventListener('resize', adjustImageLayout);
+  window.addEventListener('resize', adjustImageLayout);
 </script>
 
 </body>
