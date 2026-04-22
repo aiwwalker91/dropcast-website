@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — dropcast</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --coral:        #E8461C;
+    --coral-dark:   #C93A14;
+    --cream:        #F5EDE3;
+    --charcoal:     #1A1A1A;
+    --warm-neutral: #C9B5A8;
+    --white:        #FFFFFF;
+    --font-serif:   Georgia, serif;
+    --font-sans:    'Manrope', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--cream);
+    color: var(--charcoal);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Grain texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.4;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 3rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Header ─────────────────────────────────────────────────── */
+  header {
+    padding: 2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .wordmark {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: var(--coral);
+    text-decoration: none;
+    font-style: normal;
+  }
+
+  /* Home button — pill shaped, coral, white text */
+  .btn-home {
+    display: inline-block;
+    background: var(--coral);
+    color: var(--white);
+    padding: 10px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background 0.3s ease-out, transform 0.3s ease-out;
+    box-shadow: 0 6px 20px rgba(232, 70, 28, 0.18);
+  }
+
+  .btn-home:hover {
+    background: var(--coral-dark);
+    transform: translateY(-2px);
+  }
+
+  /* ── Content ─────────────────────────────────────────────────── */
+  main {
+    padding: 3rem 0 6rem;
+    max-width: 720px;
+  }
+
+  /* Section label above the title */
+  .section-label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--warm-neutral);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+
+  .last-updated {
+    font-size: 0.85rem;
+    color: var(--warm-neutral);
+    font-style: italic;
+    margin-bottom: 3rem;
+    display: block;
+  }
+
+  /* Divider */
+  .divider {
+    width: 40px;
+    height: 3px;
+    background: var(--coral);
+    border-radius: 2px;
+    margin-bottom: 3rem;
+  }
+
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--coral);
+    margin: 2.5rem 0 0.75rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--charcoal);
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--charcoal);
+    margin-bottom: 0.4rem;
+  }
+
+  a.inline-link {
+    color: var(--coral);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(232, 70, 28, 0.3);
+    transition: border-color 0.3s ease-out;
+  }
+
+  a.inline-link:hover { border-color: var(--coral); }
+
+  /* ── Footer ──────────────────────────────────────────────────── */
+  footer {
+    padding: 2.5rem 0;
+    border-top: 1px solid #E0D5C8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    color: var(--warm-neutral);
+  }
+
+  footer a {
+    color: var(--warm-neutral);
+    text-decoration: none;
+    transition: color 0.3s ease-out;
+  }
+
+  footer a:hover { color: var(--coral); }
+
+  @media (max-width: 700px) {
+    .page { padding: 0 1.5rem; }
+    header { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+    h1 { font-size: 1.8rem; }
+    footer { flex-direction: column; gap: 1rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-home:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header>
+    <a href="https://dropcast.co" class="wordmark">dropcast</a>
+    <a href="https://dropcast.co" class="btn-home">Home</a>
+  </header>
+
+  <main>
+    <span class="section-label">Legal</span>
+    <h1>Terms of Service</h1>
+    <span class="last-updated">Last updated: 14 March 2026</span>
+    <div class="divider"></div>
+
+    <h2>1. About these terms</h2>
+    <p>These Terms of Service ("Terms") govern your use of the dropcast platform operated by Dropcast Ltd, a company registered in England and Wales. By creating an account or using our services, you agree to be bound by these Terms.</p>
+
+    <h2>2. Your account</h2>
+    <p>You must be at least 18 years old to create an account. You are responsible for maintaining the security of your account credentials and for all activity that occurs under your account. You must provide accurate and complete information when registering.</p>
+
+    <h2>3. Acceptable use</h2>
+    <p>You agree to use dropcast only for lawful purposes. Content displayed on screens must comply with UK advertising standards (ASA/CAP codes) and our Acceptable Use Policy. We reserve the right to reject or remove content that violates these standards.</p>
+
+    <h2>4. Campaigns and content</h2>
+    <p>You retain ownership of all creative content you upload. By uploading content, you grant dropcast a non-exclusive licence to display it on selected screens for the duration of your campaign. You confirm that you have all necessary rights and permissions to use the content you upload.</p>
+
+    <h2>5. Payments and pricing</h2>
+    <p>Campaign pricing is displayed before purchase and varies based on screen location, duration and format. All prices are in GBP and inclusive of VAT where applicable. Payments are processed securely through our payment provider. Refunds are handled on a case-by-case basis and are not guaranteed once a campaign has gone live.</p>
+
+    <h2>6. Charity and social enterprise discounts</h2>
+    <p>Registered charities, community interest companies (CICs) and social enterprises may be eligible for a 10% discount. We may request evidence of registration (such as a Charity Commission number) to verify eligibility.</p>
+
+    <h2>7. Intellectual property</h2>
+    <p>The dropcast platform, brand, logo and all related materials are owned by Dropcast Ltd. You may not copy, modify, distribute or reverse-engineer any part of the platform without our written permission.</p>
+
+    <h2>8. Limitation of liability</h2>
+    <p>dropcast provides the platform on an "as is" basis. While we work to ensure screens display your content as scheduled, we cannot guarantee uninterrupted service. Our liability to you is limited to the amount you have paid for the affected campaign.</p>
+
+    <h2>9. Termination</h2>
+    <p>You may close your account at any time by contacting us. We may suspend or terminate accounts that violate these Terms. On termination, any active campaigns will be cancelled and a pro-rata refund may be issued at our discretion.</p>
+
+    <h2>10. Changes to these terms</h2>
+    <p>We may update these Terms from time to time. We will notify you of significant changes by email or through the platform. Continued use of dropcast after changes take effect constitutes acceptance of the updated Terms.</p>
+
+    <h2>11. Governing law</h2>
+    <p>These Terms are governed by the laws of England and Wales. Any disputes shall be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+
+    <h2>12. Contact</h2>
+    <p>If you have any questions about these Terms, please contact us at <a href="mailto:hello@dropcast.co" class="inline-link">hello@dropcast.co</a>.</p>
+  </main>
+
+</div>
+
+<div class="page" style="flex: 0;">
+  <footer>
+    <div>© 2026 Dropcast Ltd</div>
+    <div><a href="mailto:hello@dropcast.co">hello@dropcast.co</a></div>
+  </footer>
+</div>
+
+</body>
+</html>
