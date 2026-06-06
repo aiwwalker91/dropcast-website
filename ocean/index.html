@@ -92,10 +92,10 @@
   /* ── Hero: full-width two-column, slideshow on right ── */
   .hero {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-columns: 0.4fr 1.6fr;
     gap: 5rem;
     align-items: start;
-    padding: 2rem 0 5rem;
+    padding: 2rem 0 3rem;
     border-bottom: 1px solid #E0D5C8;
   }
 
@@ -195,6 +195,44 @@
     color: var(--warm-neutral);
   }
 
+  /* ── Inline fact ── */
+  .inline-fact {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #E0D5C8;
+  }
+
+  .fact-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--coral);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .inline-fact h3 {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--charcoal);
+    margin-bottom: 0.75rem;
+  }
+
+  .inline-fact h3 em {
+    font-style: italic;
+    font-weight: 700;
+    color: var(--coral);
+  }
+
+  .inline-fact p {
+    font-size: 0.88rem;
+    color: var(--warm-neutral);
+    line-height: 1.65;
+  }
+
   /* ── Slideshow — big, right column, full height ── */
   .hero-right {
     position: sticky;
@@ -208,9 +246,9 @@
     aspect-ratio: 9 / 16;
     position: relative;
     overflow: hidden;
-    background: var(--charcoal);
-    border-radius: 4px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
   }
 
   .slide {
@@ -229,16 +267,16 @@
 
   .slide.active { opacity: 1; }
 
-  .slide-1 { background: linear-gradient(160deg, #0A4B6B 0%, #0D6B8F 100%); }
-  .slide-2 { background: linear-gradient(160deg, #0D3D5C 0%, #1A6B8F 100%); }
-  .slide-3 { background: linear-gradient(160deg, #083347 0%, #0A5C7A 100%); }
-  .slide-4 { background: linear-gradient(160deg, #0E4F6E 0%, #125F82 100%); }
-  .slide-5 { background: linear-gradient(160deg, #0B3F5E 0%, #0E5874 100%); }
+  .slide-1 { background: transparent; }
+  .slide-2 { background: transparent; }
+  .slide-3 { background: transparent; }
+  .slide-4 { background: transparent; }
+  .slide-5 { background: transparent; }
 
   .slide img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     position: absolute;
     inset: 0;
   }
@@ -285,7 +323,7 @@
   }
 
   .fact-image-wrap {
-    max-width: 100%;
+    max-width: 50%;
   }
 
   .fact-image {
@@ -351,7 +389,7 @@
 
   /* ── CTA section ── */
   .cta-section {
-    padding: 5rem 0 6rem;
+    padding: 3rem 0 4rem;
     display: grid;
     grid-template-columns: 0.4fr 1.6fr;
     gap: 5rem;
@@ -542,6 +580,13 @@
           </div>
         </li>
       </ul>
+
+      <!-- Did you know fact -->
+      <div class="inline-fact">
+        <span class="fact-eyebrow">Did you know?</span>
+        <h3>The world's largest waterfall is <em>underwater.</em></h3>
+        <p>The Denmark Strait Cataract sits between Greenland and Iceland. Twice the height of Angel Falls, carrying 2,000 times more water than Niagara Falls — entirely invisible beneath the surface. Climate change is threatening to destroy it.</p>
+      </div>
     </div>
 
     <!-- Big slideshow, right column -->
@@ -568,36 +613,6 @@
         </div>
       </div>
       <div class="slide-dots" id="dots"></div>
-    </div>
-  </section>
-</div>
-
-<!-- ── Waterfall fact ── -->
-<div class="page">
-  <section class="fact-section">
-    <span class="facts-label">Did you know?</span>
-    <div class="fact-waterfall">
-
-      <!-- Replace this div with your Denmark Strait image -->
-      <div class="fact-image">
-        <div class="fact-image-placeholder">
-          <!-- To use your image, replace this entire div with:
-               <img src="denmark-strait-cataract.jpg" alt="The Denmark Strait Cataract"> -->
-          <span class="image-caption">Denmark Strait Cataract<br>Between Greenland &amp; Iceland</span>
-        </div>
-      </div>
-      </div><!-- end fact-image-wrap -->
-
-      <div class="fact-text">
-        <h2>The world's <em>largest waterfall</em> is underwater.</h2>
-        <p>
-          The Denmark Strait Cataract sits between Greenland and Iceland, plunging 11,500 feet beneath the surface — twice the height of Angel Falls.
-        </p>
-        <p>
-          It carries 2,000 times more water than Niagara Falls. It flows entirely unseen. And climate change is threatening to destroy it.
-        </p>
-
-      </div>
     </div>
   </section>
 </div>
