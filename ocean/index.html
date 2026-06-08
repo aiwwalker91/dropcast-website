@@ -265,7 +265,6 @@
   }
 
   .slide.active {
-    position: relative;
     opacity: 1;
   }
 
@@ -578,17 +577,24 @@
 
   @media (prefers-reduced-motion: reduce) {
     .eyebrow, h1, .intro, .section-label, .links-list, .hero-right { animation: none; opacity: 1; }
-    .slide { transition: none; }
-    .btn-primary:hover { transform: none; }
+    .slideshow {
+    position: relative;
   }
-    .poster-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    font-weight: 700;
-    color: var(--warm-neutral);
-    margin-bottom: 0.75rem;
-    text-align: center;
+
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    pointer-events: none;
+  }
+
+  .slide.active {
+    position: relative;
+    opacity: 1;
+    pointer-events: auto;
   }
 </style>
 </head>
