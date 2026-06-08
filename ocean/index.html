@@ -302,6 +302,18 @@
 
   .dot.active { background: var(--coral); }
 
+  .poster-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--warm-neutral);
+    margin-bottom: 0.75rem;
+    text-align: center;
+    width: 100%;
+    display: block;
+  }
+
   /* ── Waterfall fact section — full bleed with image ── */
   .fact-section {
     padding: 5rem 0;
@@ -577,12 +589,13 @@
 
   @media (prefers-reduced-motion: reduce) {
     .eyebrow, h1, .intro, .section-label, .links-list, .hero-right { animation: none; opacity: 1; }
+    
     .slideshow {
     position: relative;
   }
 
   .slide {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
