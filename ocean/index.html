@@ -237,7 +237,7 @@
       line-height: 1.65;
     }
 
-    /* ── Slideshow (Right Column) ── */
+    /* ── Slideshow Block ── */
     .hero-right {
       position: sticky;
       top: 2rem;
@@ -258,6 +258,35 @@
       display: block;
     }
 
+    .slideshow-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    /* "Click to Enlarge" Micro-hint overlay */
+    .slideshow-wrapper::after {
+      content: 'Click to Enlarge ⤢';
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(26, 26, 26, 0.75);
+      color: var(--white);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      border-radius: 4px;
+      z-index: 5;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .slideshow-wrapper:hover::after {
+      opacity: 1;
+    }
+
     .slideshow {
       width: 100%;
       aspect-ratio: 9 / 16;
@@ -265,6 +294,7 @@
       overflow: hidden;
       border-radius: 4px;
       background: #EAE0D5;
+      cursor: zoom-in;
     }
 
     .slide {
@@ -307,6 +337,51 @@
     .dot.active { 
       background: var(--coral); 
       transform: scale(1.2);
+    }
+
+    /* ── Lightbox Modal Structure ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 26, 26, 0.95);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      cursor: zoom-out;
+    }
+
+    .lightbox.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 85vh;
+      border-radius: 4px;
+      object-fit: contain;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
+    }
+
+    .lightbox.open .lightbox-content {
+      transform: scale(1);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      color: var(--white);
+      font-size: 2.5rem;
+      font-weight: 300;
+      cursor: pointer;
+      line-height: 1;
+      user-select: none;
     }
 
     /* ── CTA Section ── */
@@ -457,12 +532,37 @@
         gap: 3rem;
       }
 
-      /* Elevates slideshow stack layout cleanly on mobile screen widths */
       .hero-right {
         order: -1;
         position: static;
         max-width: 340px;
         margin: 0 auto;
+      }
+
+      /* Native horizontal slide scroll overrides specifically targeting touch screens */
+      .slideshow {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        cursor: pointer;
+      }
+
+      .slideshow::-webkit-scrollbar {
+        display: none; /* Hide scrollbar tracking seamlessly */
+      }
+
+      .slide {
+        position: relative;
+        flex: 0 0 100%;
+        width: 100%;
+        opacity: 1;
+        scroll-snap-align: start;
+      }
+
+      .slideshow-wrapper::after {
+        display: none; /* Hide desktop hover hint on mobile view */
       }
 
       footer { 
@@ -478,10 +578,9 @@
 
     @media (max-width: 480px) {
       h1 { font-size: 2.1rem; }
-      .hero-right { max-width: 100%; padding: 0 1rem; }
+      .hero-right { max-width: 100%; padding: 0 0.5rem; }
     }
 
-    /* Accessibility Overrides */
     @media (prefers-reduced-motion: reduce) {
       .eyebrow, h1, .intro, .section-label, .links-list, .hero-right { 
         animation: none; 
@@ -510,7 +609,7 @@
         <span class="eyebrow">8th June · World Ocean Day</span>
         <h1>June is <em>Ocean<br>Action Month.</em></h1>
         <p class="intro">
-          The ocean covers two thirds of our planet, produces half the air we breathe, and houses species we don't yet understand. Let's protect it.
+          The ocean covers two thirds of our planet, produces half the air we breathe, and houses species we don't yet understand. She deserves more than one day.
         </p>
         
         <span class="section-label">Get involved</span>
@@ -519,7 +618,7 @@
             <img src="wod-thumbnail.png" alt="🌊" class="link-thumb" onerror="this.style.display='none'">
             <div>
               <a href="https://worldoceanday.org" target="_blank" rel="noopener">World Ocean Day</a>
-              <span class="link-desc"> ~ Sign petitions, find events, join the movement.</span>
+              <span class="link-desc"> sign petitions, find events, join the movement.</span>
             </div>
           </li>
         </ul>
@@ -533,17 +632,24 @@
 
       <div class="hero-right">
         <div class="poster-label">World Ocean Day 2026 Artists</div>
-        <div class="slideshow" id="slideshow">
-          <div class="slide slide-1 active"><img src="Poster-1.png" alt="Ocean poster 1"></div>
-          <div class="slide slide-2"><img src="Poster-2.png" alt="Ocean poster 2"></div>
-          <div class="slide slide-3"><img src="Poster-3.png" alt="Ocean poster 3"></div>
-          <div class="slide slide-4"><img src="Poster-4.png" alt="Ocean poster 4"></div>
-          <div class="slide slide-5"><img src="Poster-5.png" alt="Ocean poster 5"></div>
-          <div class="slide slide-6"><img src="Poster-6.png" alt="Ocean poster 6"></div>
+        <div class="slideshow-wrapper">
+          <div class="slideshow" id="slideshow">
+            <div class="slide slide-1 active"><img src="Poster-1.png" alt="Ocean poster 1"></div>
+            <div class="slide slide-2"><img src="Poster-2.png" alt="Ocean poster 2"></div>
+            <div class="slide slide-3"><img src="Poster-3.png" alt="Ocean poster 3"></div>
+            <div class="slide slide-4"><img src="Poster-4.png" alt="Ocean poster 4"></div>
+            <div class="slide slide-5"><img src="Poster-5.png" alt="Ocean poster 5"></div>
+            <div class="slide slide-6"><img src="Poster-6.png" alt="Ocean poster 6"></div>
+          </div>
         </div>
         <div class="slide-dots" id="dots"></div>
       </div>
     </section>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <img src="" alt="Enlarged Poster Artwork" class="lightbox-content" id="lightboxImg">
   </div>
 
   <div class="page">
@@ -595,12 +701,18 @@
   </div>
 
   <script>
+    const slideshow = document.getElementById('slideshow');
     const slides = document.querySelectorAll('.slide');
     const dotsContainer = document.getElementById('dots');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+    
     let current = 0;
     let timer;
+    let isMobile = window.innerWidth <= 900;
 
-    // Generate Navigation Dots
+    // Build dots indicator navigation matrix
     slides.forEach((_, i) => {
       const dot = document.createElement('div');
       dot.className = 'dot' + (i === 0 ? ' active' : '');
@@ -612,21 +724,77 @@
     });
 
     function goTo(n) {
-      slides[current].classList.remove('active');
+      if (isMobile) {
+        // Scroll horizontally on touch layouts
+        const slideWidth = slideshow.clientWidth;
+        slideshow.scrollTo({ left: slideWidth * n, behavior: 'smooth' });
+        updateDots(n);
+      } else {
+        // Desktop visual cross-fade setup
+        slides[current].classList.remove('active');
+        dotsContainer.children[current].classList.remove('active');
+        current = n;
+        slides[current].classList.add('active');
+        dotsContainer.children[current].classList.add('active');
+      }
+    }
+
+    function updateDots(index) {
       dotsContainer.children[current].classList.remove('active');
-      current = n;
-      slides[current].classList.add('active');
+      current = index;
       dotsContainer.children[current].classList.add('active');
     }
 
+    // Capture mobile manual touch swipe transitions cleanly
+    slideshow.addEventListener('scroll', () => {
+      if (isMobile) {
+        const index = Math.round(slideshow.scrollLeft / slideshow.clientWidth);
+        if (index !== current && index < slides.length) {
+          updateDots(index);
+        }
+      }
+    });
+
     function startTimer() {
-      timer = setInterval(() => goTo((current + 1) % slides.length), 5000);
+      if (!isMobile) {
+        timer = setInterval(() => goTo((current + 1) % slides.length), 5000);
+      }
     }
 
     function resetTimer() {
       clearInterval(timer);
       startTimer();
     }
+
+    // ── Click To Enlarge (Lightbox API Intercepts) ──
+    slideshow.addEventListener('click', (e) => {
+      const clickedImg = e.target.closest('img');
+      if (clickedImg) {
+        lightboxImg.src = clickedImg.src;
+        lightboxImg.alt = clickedImg.alt;
+        lightbox.classList.add('open');
+      }
+    });
+
+    // Close lightboxes natively on clean structural dismiss clicks
+    lightbox.addEventListener('click', (e) => {
+      if (e.target !== lightboxImg) {
+        lightbox.classList.remove('open');
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      const checkMobile = window.innerWidth <= 900;
+      if (checkMobile !== isMobile) {
+        isMobile = checkMobile;
+        clearInterval(timer);
+        if (!isMobile) {
+          // Re-sync desktop architecture visibility cleanly on resize
+          slides.forEach((s, idx) => s.classList.toggle('active', idx === current));
+          startTimer();
+        }
+      }
+    });
 
     startTimer();
   </script>
